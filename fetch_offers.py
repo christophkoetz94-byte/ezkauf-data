@@ -153,4 +153,33 @@ def main():
             {"name": "Chef Select Lasagne Bolognese 1kg", "market": "Lidl", "price": 4.49, "discount_price": 3.49, "unit": "1 kg", "city": "Köln"},
             {"name": "Italienischer Rohschinken 100g", "market": "Lidl", "price": 2.19, "discount_price": 1.69, "unit": "100g", "city": "Köln"},
             {"name": "Tiefkühl Himbeeren 500g Beutel", "market": "Lidl", "price": 3.29, "discount_price": 2.39, "unit": "1 kg = 4.78 €", "city": "Köln"},
-            {"name": "Saskia Mineralwasser 6x1.5l Pack", "market": "Lidl", "price":
+            {"name": "Saskia Mineralwasser 6x1.5l Pack", "market": "Lidl", "price": 1.74, "discount_price": 1.35, "unit": "1 l = 0.15 €", "city": "Köln"},
+            {"name": "Frisches Baguette 250g", "market": "Lidl", "price": 0.79, "discount_price": 0.49, "unit": "100g = 0.20 €", "city": "Köln"},
+            {"name": "Bio Tofu Natur 400g (2x200g)", "market": "Lidl", "price": 2.19, "discount_price": 1.69, "unit": "1 kg = 4.23 €", "city": "Köln"},
+            {"name": "Crownfield Knusper Müsli 500g", "market": "Lidl", "price": 2.39, "discount_price": 1.79, "unit": "1 kg = 3.58 €", "city": "Köln"}
+        ]
+        
+        seen_keys = {(o["name"].lower(), o["market"]) for o in offers}
+        for item in mega_catalog:
+            key = (item["name"].lower(), item["market"])
+            if key not in seen_keys:
+                seen_keys.add(key)
+                offers.append(item)
+
+    print(f"Endgültige Anzahl an Kölner Angeboten: {len(offers)}")
+
+    dataset = {
+        "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "city": "Köln",
+        "total_offers": len(offers),
+        "offers": offers
+    }
+    
+    os.makedirs("public", exist_ok=True)
+    with open("public/angebote_koeln.json", "w", encoding="utf-8") as f:
+        json.dump(dataset, f, ensure_ascii=False, indent=2)
+
+    print("Erfolgreich gespeichert.")
+
+if __name__ == "__main__":
+    main()
