@@ -1,49 +1,6 @@
 {
-  "updated_at": "2026-11-09 13:15:34",
+  "updated_at": "2026-11-09 13:23:17",
   "city": "Köln",
-  "total_offers": 6,
-  "offers": [
-    {
-      "name": "Barilla Pasta 500g",
-      "market": "REWE",
-      "price": 1.99,
-      "discount_price": 0.89,
-      "city": "Köln"
-    },
-    {
-      "name": "Kerrygold Butter 250g",
-      "market": "Lidl",
-      "price": 2.59,
-      "discount_price": 1.49,
-      "city": "Köln"
-    },
-    {
-      "name": "Hackfleisch gemischt 500g",
-      "market": "ALDI Süd",
-      "price": 4.99,
-      "discount_price": 3.79,
-      "city": "Köln"
-    },
-    {
-      "name": "Gurke",
-      "market": "Lidl",
-      "price": 0.99,
-      "discount_price": 0.59,
-      "city": "Köln"
-    },
-    {
-      "name": "Tomaten passiert 500g",
-      "market": "ALDI Süd",
-      "price": 0.89,
-      "discount_price": 0.65,
-      "city": "Köln"
-    },
-    {
-      "name": "Red Bull 250ml",
-      "market": "REWE",
-      "price": 1.49,
-      "discount_price": 0.99,
-      "city": "Köln"
-    }
-  ]
+  "total_offers": 0,
+  "offers": []
 }
