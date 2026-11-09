@@ -1,0 +1,36 @@
+name: Auto-Sync Kölner Angebote
+
+on:
+  schedule:
+    # Läuft jeden Montag um 04:00 UTC (05:00 Uhr deutscher Zeit)
+    - cron: '0 4 * * 1'
+  workflow_dispatch: # Erlaubt manuelles Starten per Klick
+
+jobs:
+  scrape-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install requests
+
+      - name: Kölner Angebote scrapen
+        run: python fetch_offers.py
+
+      - name: Neue Angebote speichern
+        run: |
+          git config user.name "EZKauf Bot"
+          git config user.email "bot@ezkauf.local"
+          git add public/angebote_koeln.json
+          git commit -m "Auto-Update: Kölner Angebote [skip ci]" || exit 0
+          git push
