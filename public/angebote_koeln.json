@@ -1,638 +1,3111 @@
 {
-  "updated_at": "2026-11-09 14:00:31",
+  "updated_at": "2026-11-09 14:04:07",
   "city": "Köln",
-  "total_offers": 79,
+  "total_offers": 345,
   "offers": [
     {
-      "name": "Barilla Pasta 500g",
+      "name": "Bananen 1kg",
       "market": "REWE",
-      "price": 1.99,
-      "discount_price": 0.89,
-      "unit": "1 kg = 1.78 €",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "1 kg",
+      "category": "Obst",
       "city": "Köln"
     },
     {
-      "name": "Red Bull Energy Drink 250ml",
-      "market": "REWE",
-      "price": 1.49,
-      "discount_price": 0.99,
-      "unit": "1 l = 3.96 €",
+      "name": "Bananen 1kg",
+      "market": "ALDI Süd",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "1 kg",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bananen 1kg",
+      "market": "Lidl",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "1 kg",
+      "category": "Obst",
       "city": "Köln"
     },
     {
       "name": "Chiquita Bananen 1kg",
       "market": "REWE",
-      "price": 2.29,
-      "discount_price": 1.49,
+      "price": 2.63,
+      "discount_price": 2.29,
       "unit": "1 kg",
+      "category": "Obst",
       "city": "Köln"
     },
     {
-      "name": "Kerrygold Irische Butter 250g",
-      "market": "REWE",
-      "price": 2.79,
-      "discount_price": 1.69,
-      "unit": "1 kg = 6.76 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Müllermilch 400ml",
-      "market": "REWE",
-      "price": 1.39,
-      "discount_price": 0.69,
-      "unit": "1 l = 1.73 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Coca-Cola / Fanta / Sprite 1.25l",
-      "market": "REWE",
-      "price": 1.69,
-      "discount_price": 0.99,
-      "unit": "1 l = 0.79 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bio Salatgurke",
-      "market": "REWE",
-      "price": 1.19,
-      "discount_price": 0.79,
-      "unit": "Stück",
-      "city": "Köln"
-    },
-    {
-      "name": "Rinderhackfleisch 500g",
-      "market": "REWE",
-      "price": 5.99,
-      "discount_price": 4.49,
-      "unit": "1 kg = 8.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Dr. Oetker Ristorante Pizza",
-      "market": "REWE",
-      "price": 3.49,
+      "name": "Chiquita Bananen 1kg",
+      "market": "ALDI Süd",
+      "price": 2.23,
       "discount_price": 1.99,
-      "unit": "Stück",
-      "city": "Köln"
-    },
-    {
-      "name": "Philadelphia Frischkäse 175g",
-      "market": "REWE",
-      "price": 2.19,
-      "discount_price": 1.11,
-      "unit": "100g = 0.63 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Wagner Steinofen Pizza",
-      "market": "REWE",
-      "price": 2.99,
-      "discount_price": 1.79,
-      "unit": "Stück",
-      "city": "Köln"
-    },
-    {
-      "name": "Lavazza Crema e Aroma Bohnen 1kg",
-      "market": "REWE",
-      "price": 15.99,
-      "discount_price": 10.99,
       "unit": "1 kg",
+      "category": "Obst",
       "city": "Köln"
     },
     {
-      "name": "Krombacher Pils 20x0.5l Kasten",
-      "market": "REWE",
-      "price": 14.99,
-      "discount_price": 10.49,
-      "unit": "1 l = 1.05 €",
+      "name": "Chiquita Bananen 1kg",
+      "market": "Lidl",
+      "price": 2.23,
+      "discount_price": 1.99,
+      "unit": "1 kg",
+      "category": "Obst",
       "city": "Köln"
     },
     {
-      "name": "Ja! Spaghetti 500g",
+      "name": "Äpfel Braeburn 1kg",
       "market": "REWE",
-      "price": 0.79,
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "1 kg",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Äpfel Braeburn 1kg",
+      "market": "ALDI Süd",
+      "price": 2.23,
+      "discount_price": 1.99,
+      "unit": "1 kg",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Äpfel Braeburn 1kg",
+      "market": "Lidl",
+      "price": 2.23,
+      "discount_price": 1.99,
+      "unit": "1 kg",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Gurke frisch",
+      "market": "REWE",
+      "price": 1.14,
+      "discount_price": 0.99,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Gurke frisch",
+      "market": "ALDI Süd",
+      "price": 0.88,
       "discount_price": 0.79,
-      "unit": "500g",
+      "unit": "Stück",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
-      "name": "Ja! Deutsche Markenbutter 250g",
+      "name": "Bio Gurke frisch",
+      "market": "Lidl",
+      "price": 0.88,
+      "discount_price": 0.79,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Salatgurke",
       "market": "REWE",
+      "price": 0.91,
+      "discount_price": 0.79,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Salatgurke",
+      "market": "ALDI Süd",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Salatgurke",
+      "market": "Lidl",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Rispentomaten 1kg",
+      "market": "REWE",
+      "price": 2.63,
+      "discount_price": 2.29,
+      "unit": "1 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Rispentomaten 1kg",
+      "market": "ALDI Süd",
+      "price": 2.0,
+      "discount_price": 1.79,
+      "unit": "1 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Rispentomaten 1kg",
+      "market": "Lidl",
       "price": 1.89,
       "discount_price": 1.69,
-      "unit": "1 kg = 6.76 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Alpro Haferdrink Barista 1l",
-      "market": "REWE",
-      "price": 2.49,
-      "discount_price": 1.49,
-      "unit": "1 l",
-      "city": "Köln"
-    },
-    {
-      "name": "Fleischwurst im Ring 400g",
-      "market": "REWE",
-      "price": 2.49,
-      "discount_price": 1.99,
-      "unit": "1 kg = 4.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Dallmayr Prodomo Kaffee 500g",
-      "market": "REWE",
-      "price": 7.49,
-      "discount_price": 4.99,
-      "unit": "1 kg = 9.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Nutella Nuss-Nugat-Creme 450g",
-      "market": "REWE",
-      "price": 3.29,
-      "discount_price": 2.22,
-      "unit": "1 kg = 4.93 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Zott Monte Maxi 4x100g",
-      "market": "REWE",
-      "price": 2.29,
-      "discount_price": 1.49,
-      "unit": "1 kg = 3.73 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Haribo Fruchtgummi 175g Beutel",
-      "market": "REWE",
-      "price": 1.19,
-      "discount_price": 0.79,
-      "unit": "100g = 0.45 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Frische Erdbeeren Schale 500g",
-      "market": "REWE",
-      "price": 3.49,
-      "discount_price": 2.22,
-      "unit": "1 kg = 4.44 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Maggi Fix verschiedene Sorten",
-      "market": "REWE",
-      "price": 1.09,
-      "discount_price": 0.49,
-      "unit": "Beutel",
-      "city": "Köln"
-    },
-    {
-      "name": "Milka Schokolade 100g Tafel",
-      "market": "REWE",
-      "price": 1.49,
-      "discount_price": 0.79,
-      "unit": "100g",
-      "city": "Köln"
-    },
-    {
-      "name": "Funny Frisch Chipsfrisch 150g",
-      "market": "REWE",
-      "price": 1.99,
-      "discount_price": 1.11,
-      "unit": "100g = 0.74 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Gerolsteiner Sprudel 12x1l Kasten",
-      "market": "REWE",
-      "price": 7.99,
-      "discount_price": 5.99,
-      "unit": "1 l = 0.50 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Gutfried Hähnchenbrust-Aufschnitt 100g",
-      "market": "REWE",
-      "price": 1.99,
-      "discount_price": 1.49,
-      "unit": "100g",
-      "city": "Köln"
-    },
-    {
-      "name": "Iglo Fischstäbchen 15er 450g",
-      "market": "REWE",
-      "price": 4.49,
-      "discount_price": 2.79,
-      "unit": "1 kg = 6.20 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Hackfleisch gemischt 500g",
-      "market": "ALDI Süd",
-      "price": 4.79,
-      "discount_price": 3.49,
-      "unit": "1 kg = 6.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Gut Bio Eier 10er Pack",
-      "market": "ALDI Süd",
-      "price": 2.69,
-      "discount_price": 1.99,
-      "unit": "10 Stk",
-      "city": "Köln"
-    },
-    {
-      "name": "Cucina Nobilis Passierte Tomaten 500g",
-      "market": "ALDI Süd",
-      "price": 0.89,
-      "discount_price": 0.59,
-      "unit": "1 kg = 1.18 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Gouda jung in Scheiben 400g",
-      "market": "ALDI Süd",
-      "price": 2.99,
-      "discount_price": 1.99,
-      "unit": "1 kg = 4.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Frische Paprika rot 500g",
-      "market": "ALDI Süd",
-      "price": 2.19,
-      "discount_price": 1.29,
-      "unit": "1 kg = 2.58 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bio Vollmilch 3.8% 1l",
-      "market": "ALDI Süd",
-      "price": 1.45,
-      "discount_price": 1.15,
-      "unit": "1 l",
-      "city": "Köln"
-    },
-    {
-      "name": "Avocado Hass verzehrfertig",
-      "market": "ALDI Süd",
-      "price": 1.29,
-      "discount_price": 0.79,
-      "unit": "Stück",
-      "city": "Köln"
-    },
-    {
-      "name": "Hähnchenbrustfilet frisch 600g",
-      "market": "ALDI Süd",
-      "price": 6.99,
-      "discount_price": 5.29,
-      "unit": "1 kg = 8.82 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Rispentomaten frisch 1kg",
-      "market": "ALDI Süd",
-      "price": 2.49,
-      "discount_price": 1.49,
       "unit": "1 kg",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
-      "name": "Milsani Quark 40% Fett 250g",
+      "name": "Snack-Tomaten Eimer 500g",
+      "market": "REWE",
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Snack-Tomaten Eimer 500g",
       "market": "ALDI Süd",
-      "price": 1.19,
-      "discount_price": 0.85,
-      "unit": "1 kg = 3.40 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bio Olivenöl Nativ Extra 500ml",
-      "market": "ALDI Süd",
-      "price": 6.99,
-      "discount_price": 5.49,
-      "unit": "1 l = 10.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Landliebe Joghurt 500g Glas",
-      "market": "ALDI Süd",
-      "price": 1.79,
-      "discount_price": 0.99,
-      "unit": "1 kg = 1.98 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Tiefkühl Lachsfilet 250g",
-      "market": "ALDI Süd",
-      "price": 4.69,
-      "discount_price": 3.69,
-      "unit": "1 kg = 14.76 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Mozzarella Mini 125g",
-      "market": "ALDI Süd",
-      "price": 1.19,
-      "discount_price": 0.79,
-      "unit": "100g = 0.63 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Champignons braun 400g Schale",
-      "market": "ALDI Süd",
-      "price": 1.99,
-      "discount_price": 1.39,
-      "unit": "1 kg = 3.48 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Möhren Bund 1kg",
-      "market": "ALDI Süd",
-      "price": 1.49,
-      "discount_price": 0.99,
-      "unit": "1 kg",
-      "city": "Köln"
-    },
-    {
-      "name": "Fleischwurst Geflügel 400g",
-      "market": "ALDI Süd",
-      "price": 2.19,
-      "discount_price": 1.79,
-      "unit": "1 kg = 4.48 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bratwurst Thüringer Art 5x100g",
-      "market": "ALDI Süd",
-      "price": 3.49,
-      "discount_price": 2.69,
-      "unit": "1 kg = 5.38 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Tiefkühl Garnelen King Prawns 225g",
-      "market": "ALDI Süd",
-      "price": 4.29,
-      "discount_price": 3.49,
-      "unit": "100g = 1.55 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bio Haferflocken 500g",
-      "market": "ALDI Süd",
-      "price": 0.89,
-      "discount_price": 0.69,
-      "unit": "1 kg = 1.38 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Milsani Frischkäse 200g",
-      "market": "ALDI Süd",
-      "price": 1.39,
-      "discount_price": 0.99,
-      "unit": "100g = 0.50 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Zwiebeln Speisezwiebeln 2kg Netz",
-      "market": "ALDI Süd",
-      "price": 1.89,
-      "discount_price": 1.29,
-      "unit": "1 kg = 0.65 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Bio Bananen 1kg",
-      "market": "ALDI Süd",
-      "price": 1.99,
-      "discount_price": 1.39,
-      "unit": "1 kg",
-      "city": "Köln"
-    },
-    {
-      "name": "Tafeltrauben hell kernlos 500g",
-      "market": "ALDI Süd",
-      "price": 2.29,
-      "discount_price": 1.59,
-      "unit": "1 kg = 3.18 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Rapsöl rein 1l Flasche",
-      "market": "ALDI Süd",
-      "price": 1.79,
-      "discount_price": 1.49,
-      "unit": "1 l",
-      "city": "Köln"
-    },
-    {
-      "name": "Kaiserbrötchen frisch 4 Stück",
-      "market": "ALDI Süd",
-      "price": 0.76,
-      "discount_price": 0.56,
-      "unit": "Stück = 0.14 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Toilettenpapier 3-lagig 10er Pack",
-      "market": "ALDI Süd",
-      "price": 3.95,
-      "discount_price": 3.29,
-      "unit": "10 Rollen",
-      "city": "Köln"
-    },
-    {
-      "name": "Milbona Frische Butter 250g",
-      "market": "Lidl",
-      "price": 2.29,
-      "discount_price": 1.39,
-      "unit": "1 kg = 5.56 €",
-      "city": "Köln"
-    },
-    {
-      "name": "Speisekartoffeln 2.5kg Beutel",
-      "market": "Lidl",
-      "price": 3.49,
-      "discount_price": 1.99,
-      "unit": "1 kg = 0.80 €",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "500 g",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
       "name": "Snack-Tomaten Eimer 500g",
       "market": "Lidl",
-      "price": 2.49,
+      "price": 2.0,
+      "discount_price": 1.79,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Paprika rot 500g",
+      "market": "REWE",
+      "price": 2.52,
+      "discount_price": 2.19,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Paprika rot 500g",
+      "market": "ALDI Süd",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Paprika rot 500g",
+      "market": "Lidl",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Paprika Mix 3er Pack 500g",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Paprika Mix 3er Pack 500g",
+      "market": "ALDI Süd",
+      "price": 1.67,
       "discount_price": 1.49,
-      "unit": "1 kg = 2.98 €",
+      "unit": "500 g",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
-      "name": "Combino Spaghetti N°5 500g",
+      "name": "Paprika Mix 3er Pack 500g",
       "market": "Lidl",
-      "price": 0.99,
-      "discount_price": 0.65,
-      "unit": "1 kg = 1.30 €",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "500 g",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
-      "name": "Frischer Lachs 2 x 125g Packung",
+      "name": "Speisekartoffeln 2.5kg Beutel",
+      "market": "REWE",
+      "price": 3.78,
+      "discount_price": 3.29,
+      "unit": "2.5 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Speisekartoffeln 2.5kg Beutel",
+      "market": "ALDI Süd",
+      "price": 2.79,
+      "discount_price": 2.49,
+      "unit": "2.5 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Speisekartoffeln 2.5kg Beutel",
       "market": "Lidl",
-      "price": 4.99,
-      "discount_price": 3.79,
-      "unit": "1 kg = 15.16 €",
+      "price": 2.79,
+      "discount_price": 2.49,
+      "unit": "2.5 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Möhren Bund 1kg",
+      "market": "REWE",
+      "price": 1.48,
+      "discount_price": 1.29,
+      "unit": "1 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Möhren Bund 1kg",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "1 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Möhren Bund 1kg",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "1 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Zwiebeln Speisezwiebeln 2kg",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "2 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Zwiebeln Speisezwiebeln 2kg",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "2 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Zwiebeln Speisezwiebeln 2kg",
+      "market": "Lidl",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "2 kg",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Knoblauch 200g Netz",
+      "market": "REWE",
+      "price": 1.48,
+      "discount_price": 1.29,
+      "unit": "200 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Knoblauch 200g Netz",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Knoblauch 200g Netz",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Zucchini 500g",
+      "market": "REWE",
+      "price": 1.94,
+      "discount_price": 1.69,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Zucchini 500g",
+      "market": "ALDI Süd",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "500 g",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
       "name": "Bio Zucchini 500g",
       "market": "Lidl",
-      "price": 1.79,
+      "price": 1.33,
       "discount_price": 1.19,
-      "unit": "1 kg = 2.38 €",
+      "unit": "500 g",
+      "category": "Gemüse",
       "city": "Köln"
     },
     {
-      "name": "Vollkornbrot geschnitten 500g",
+      "name": "Champignons braun 400g Schale",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "400 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Champignons braun 400g Schale",
+      "market": "ALDI Süd",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "400 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Champignons braun 400g Schale",
       "market": "Lidl",
-      "price": 1.39,
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "400 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Champignons weiß 500g",
+      "market": "REWE",
+      "price": 2.17,
+      "discount_price": 1.89,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Champignons weiß 500g",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Champignons weiß 500g",
+      "market": "Lidl",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Avocado Hass essreif",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "Stück",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Avocado Hass essreif",
+      "market": "ALDI Süd",
+      "price": 1.11,
       "discount_price": 0.99,
-      "unit": "1 kg = 1.98 €",
+      "unit": "Stück",
+      "category": "Obst",
       "city": "Köln"
     },
     {
-      "name": "Ritter Sport Bunte Vielfalt 100g",
+      "name": "Avocado Hass essreif",
       "market": "Lidl",
-      "price": 1.49,
-      "discount_price": 0.88,
-      "unit": "100g",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "Stück",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Zitronen Netz 500g",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Zitronen Netz 500g",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Zitronen Netz 500g",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Heidelbeeren 300g",
+      "market": "REWE",
+      "price": 3.44,
+      "discount_price": 2.99,
+      "unit": "300 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Heidelbeeren 300g",
+      "market": "ALDI Süd",
+      "price": 2.56,
+      "discount_price": 2.29,
+      "unit": "300 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Heidelbeeren 300g",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "300 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Erdbeeren 500g Schale",
+      "market": "REWE",
+      "price": 4.01,
+      "discount_price": 3.49,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Erdbeeren 500g Schale",
+      "market": "ALDI Süd",
+      "price": 2.79,
+      "discount_price": 2.49,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Erdbeeren 500g Schale",
+      "market": "Lidl",
+      "price": 2.79,
+      "discount_price": 2.49,
+      "unit": "500 g",
+      "category": "Obst",
+      "city": "Köln"
+    },
+    {
+      "name": "Eisbergsalat frisch",
+      "market": "REWE",
+      "price": 1.48,
+      "discount_price": 1.29,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Eisbergsalat frisch",
+      "market": "ALDI Süd",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Eisbergsalat frisch",
+      "market": "Lidl",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Brokkoli 500g",
+      "market": "REWE",
+      "price": 2.06,
+      "discount_price": 1.79,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Brokkoli 500g",
+      "market": "ALDI Süd",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Brokkoli 500g",
+      "market": "Lidl",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "500 g",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Blumenkohl Stück",
+      "market": "REWE",
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Blumenkohl Stück",
+      "market": "ALDI Süd",
+      "price": 2.23,
+      "discount_price": 1.99,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Blumenkohl Stück",
+      "market": "Lidl",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "Stück",
+      "category": "Gemüse",
+      "city": "Köln"
+    },
+    {
+      "name": "Hackfleisch gemischt 500g",
+      "market": "REWE",
+      "price": 5.16,
+      "discount_price": 4.49,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Hackfleisch gemischt 500g",
+      "market": "ALDI Süd",
+      "price": 4.24,
+      "discount_price": 3.29,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Hackfleisch gemischt 500g",
+      "market": "Lidl",
+      "price": 4.24,
+      "discount_price": 3.79,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Rinderhackfleisch 500g",
+      "market": "REWE",
+      "price": 6.31,
+      "discount_price": 5.49,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Rinderhackfleisch 500g",
+      "market": "ALDI Süd",
+      "price": 5.03,
+      "discount_price": 4.49,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Rinderhackfleisch 500g",
+      "market": "Lidl",
+      "price": 5.03,
+      "discount_price": 4.49,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Hähnchenbrustfilet 600g",
+      "market": "REWE",
+      "price": 7.46,
+      "discount_price": 6.49,
+      "unit": "600 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Hähnchenbrustfilet 600g",
+      "market": "ALDI Süd",
+      "price": 6.15,
+      "discount_price": 5.49,
+      "unit": "600 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Hähnchenbrustfilet 600g",
+      "market": "Lidl",
+      "price": 6.15,
+      "discount_price": 5.49,
+      "unit": "600 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Putenbrustfilet 800g",
+      "market": "REWE",
+      "price": 9.76,
+      "discount_price": 8.49,
+      "unit": "800 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Putenbrustfilet 800g",
+      "market": "ALDI Süd",
+      "price": 8.16,
+      "discount_price": 7.29,
+      "unit": "800 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Putenbrustfilet 800g",
+      "market": "Lidl",
+      "price": 8.05,
+      "discount_price": 7.19,
+      "unit": "800 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Fleischwurst im Ring 400g",
+      "market": "REWE",
+      "price": 2.63,
+      "discount_price": 2.29,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Fleischwurst im Ring 400g",
+      "market": "ALDI Süd",
+      "price": 2.18,
+      "discount_price": 1.95,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Fleischwurst im Ring 400g",
+      "market": "Lidl",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Geflügel-Fleischwurst 400g",
+      "market": "REWE",
+      "price": 2.52,
+      "discount_price": 2.19,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Geflügel-Fleischwurst 400g",
+      "market": "ALDI Süd",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Geflügel-Fleischwurst 400g",
+      "market": "Lidl",
+      "price": 2.07,
+      "discount_price": 1.85,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Schinkenwurst geschnitten 150g",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Schinkenwurst geschnitten 150g",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Schinkenwurst geschnitten 150g",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bacon Frühstücksspeck 100g",
+      "market": "REWE",
+      "price": 1.94,
+      "discount_price": 1.69,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bacon Frühstücksspeck 100g",
+      "market": "ALDI Süd",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bacon Frühstücksspeck 100g",
+      "market": "Lidl",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Salami Klassik geschnitten 150g",
+      "market": "REWE",
+      "price": 2.17,
+      "discount_price": 1.89,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Salami Klassik geschnitten 150g",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Salami Klassik geschnitten 150g",
+      "market": "Lidl",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "150 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Gutfried Hähnchenbrust-Aufschnitt 100g",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Gutfried Hähnchenbrust-Aufschnitt 100g",
+      "market": "ALDI Süd",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Gutfried Hähnchenbrust-Aufschnitt 100g",
+      "market": "Lidl",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "100 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Wiener Würstchen 400g",
+      "market": "REWE",
+      "price": 4.01,
+      "discount_price": 3.49,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Wiener Würstchen 400g",
+      "market": "ALDI Süd",
+      "price": 3.12,
+      "discount_price": 2.79,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Wiener Würstchen 400g",
+      "market": "Lidl",
+      "price": 3.12,
+      "discount_price": 2.79,
+      "unit": "400 g",
+      "category": "Wurst",
+      "city": "Köln"
+    },
+    {
+      "name": "Bratwurst Thüringer Art 5x100g",
+      "market": "REWE",
+      "price": 4.01,
+      "discount_price": 3.49,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Bratwurst Thüringer Art 5x100g",
+      "market": "ALDI Süd",
+      "price": 3.24,
+      "discount_price": 2.89,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Bratwurst Thüringer Art 5x100g",
+      "market": "Lidl",
+      "price": 3.12,
+      "discount_price": 2.79,
+      "unit": "500 g",
+      "category": "Fleisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Frischer Lachs 2 x 125g",
+      "market": "REWE",
+      "price": 5.74,
+      "discount_price": 4.99,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Frischer Lachs 2 x 125g",
+      "market": "ALDI Süd",
+      "price": 4.47,
+      "discount_price": 3.99,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Frischer Lachs 2 x 125g",
+      "market": "Lidl",
+      "price": 4.36,
+      "discount_price": 3.49,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Tiefkühl Lachsfilet 250g",
+      "market": "REWE",
+      "price": 5.16,
+      "discount_price": 4.49,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Tiefkühl Lachsfilet 250g",
+      "market": "ALDI Süd",
+      "price": 4.24,
+      "discount_price": 3.79,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Tiefkühl Lachsfilet 250g",
+      "market": "Lidl",
+      "price": 4.13,
+      "discount_price": 3.69,
+      "unit": "250 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Iglo Fischstäbchen 15er 450g",
+      "market": "REWE",
+      "price": 4.93,
+      "discount_price": 4.29,
+      "unit": "450 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Iglo Fischstäbchen 15er 450g",
+      "market": "ALDI Süd",
+      "price": 3.91,
+      "discount_price": 3.49,
+      "unit": "450 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Iglo Fischstäbchen 15er 450g",
+      "market": "Lidl",
+      "price": 3.91,
+      "discount_price": 3.49,
+      "unit": "450 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Garnelen King Prawns 225g",
+      "market": "REWE",
+      "price": 5.16,
+      "discount_price": 4.49,
+      "unit": "225 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Garnelen King Prawns 225g",
+      "market": "ALDI Süd",
+      "price": 4.13,
+      "discount_price": 3.69,
+      "unit": "225 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Garnelen King Prawns 225g",
+      "market": "Lidl",
+      "price": 4.02,
+      "discount_price": 3.59,
+      "unit": "225 g",
+      "category": "Fisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Tofu Natur 400g",
+      "market": "REWE",
+      "price": 2.52,
+      "discount_price": 2.19,
+      "unit": "400 g",
+      "category": "Vegetarisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Tofu Natur 400g",
+      "market": "ALDI Süd",
+      "price": 2.0,
+      "discount_price": 1.79,
+      "unit": "400 g",
+      "category": "Vegetarisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Tofu Natur 400g",
+      "market": "Lidl",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "400 g",
+      "category": "Vegetarisch",
+      "city": "Köln"
+    },
+    {
+      "name": "Deutsche Markenbutter 250g",
+      "market": "REWE",
+      "price": 2.17,
+      "discount_price": 1.89,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Deutsche Markenbutter 250g",
+      "market": "ALDI Süd",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Deutsche Markenbutter 250g",
+      "market": "Lidl",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Kerrygold Irische Butter 250g",
+      "market": "REWE",
+      "price": 3.21,
+      "discount_price": 1.69,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Kerrygold Irische Butter 250g",
+      "market": "ALDI Süd",
+      "price": 2.56,
+      "discount_price": 2.29,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Kerrygold Irische Butter 250g",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Vollmilch 3.8% 1l",
+      "market": "REWE",
+      "price": 1.55,
+      "discount_price": 1.35,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Vollmilch 3.8% 1l",
+      "market": "ALDI Süd",
+      "price": 1.29,
+      "discount_price": 1.15,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Frische Vollmilch 3.8% 1l",
+      "market": "Lidl",
+      "price": 1.29,
+      "discount_price": 1.15,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "H-Milch 1.5% Fett 1l",
+      "market": "REWE",
+      "price": 1.32,
+      "discount_price": 1.15,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "H-Milch 1.5% Fett 1l",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "H-Milch 1.5% Fett 1l",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Vollmilch 1l",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Vollmilch 1l",
+      "market": "ALDI Süd",
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Vollmilch 1l",
+      "market": "Lidl",
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Alpro Haferdrink Barista 1l",
+      "market": "REWE",
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Alpro Haferdrink Barista 1l",
+      "market": "ALDI Süd",
+      "price": 2.23,
+      "discount_price": 1.99,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Alpro Haferdrink Barista 1l",
+      "market": "Lidl",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Haferdrink Natur 1l",
+      "market": "REWE",
+      "price": 1.6,
+      "discount_price": 1.39,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Haferdrink Natur 1l",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Haferdrink Natur 1l",
+      "market": "Lidl",
+      "price": 1.06,
+      "discount_price": 0.95,
+      "unit": "1 l",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Gouda jung in Scheiben 400g",
+      "market": "REWE",
+      "price": 3.32,
+      "discount_price": 2.89,
+      "unit": "400 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Gouda jung in Scheiben 400g",
+      "market": "ALDI Süd",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "400 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Gouda jung in Scheiben 400g",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "400 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Emmentaler gerieben 250g",
+      "market": "REWE",
+      "price": 2.52,
+      "discount_price": 2.19,
+      "unit": "250 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Emmentaler gerieben 250g",
+      "market": "ALDI Süd",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "250 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Emmentaler gerieben 250g",
+      "market": "Lidl",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "250 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Mozzarella 125g",
+      "market": "REWE",
+      "price": 1.14,
+      "discount_price": 0.99,
+      "unit": "125 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Mozzarella 125g",
+      "market": "ALDI Süd",
+      "price": 0.88,
+      "discount_price": 0.79,
+      "unit": "125 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Mozzarella 125g",
+      "market": "Lidl",
+      "price": 0.88,
+      "discount_price": 0.79,
+      "unit": "125 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Grana Padano gerieben 150g",
+      "market": "REWE",
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "150 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Grana Padano gerieben 150g",
+      "market": "ALDI Süd",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "150 g",
+      "category": "Käse",
       "city": "Köln"
     },
     {
       "name": "Grana Padano gerieben 150g",
       "market": "Lidl",
-      "price": 2.49,
-      "discount_price": 1.79,
-      "unit": "100g = 1.19 €",
+      "price": 2.07,
+      "discount_price": 1.85,
+      "unit": "150 g",
+      "category": "Käse",
       "city": "Köln"
     },
     {
-      "name": "Bio Haferflocken zart 500g",
-      "market": "Lidl",
-      "price": 0.89,
-      "discount_price": 0.59,
-      "unit": "1 kg = 1.18 €",
+      "name": "Frischkäse Natur 200g",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "200 g",
+      "category": "Käse",
       "city": "Köln"
     },
     {
-      "name": "Frische Heidelbeeren 300g Schale",
-      "market": "Lidl",
-      "price": 2.99,
-      "discount_price": 1.88,
-      "unit": "1 kg = 6.27 €",
+      "name": "Frischkäse Natur 200g",
+      "market": "ALDI Süd",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "200 g",
+      "category": "Käse",
       "city": "Köln"
     },
     {
-      "name": "Putenbrustfilet frisch 800g",
+      "name": "Frischkäse Natur 200g",
       "market": "Lidl",
-      "price": 8.99,
-      "discount_price": 6.79,
-      "unit": "1 kg = 8.49 €",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "200 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Philadelphia Frischkäse 175g",
+      "market": "REWE",
+      "price": 2.52,
+      "discount_price": 2.19,
+      "unit": "175 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Philadelphia Frischkäse 175g",
+      "market": "ALDI Süd",
+      "price": 1.89,
+      "discount_price": 1.69,
+      "unit": "175 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Philadelphia Frischkäse 175g",
+      "market": "Lidl",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "175 g",
+      "category": "Käse",
+      "city": "Köln"
+    },
+    {
+      "name": "Magerquark 500g Becher",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Magerquark 500g Becher",
+      "market": "ALDI Süd",
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Magerquark 500g Becher",
+      "market": "Lidl",
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Speisequark 40% 250g",
+      "market": "REWE",
+      "price": 1.37,
+      "discount_price": 1.19,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Speisequark 40% 250g",
+      "market": "ALDI Süd",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Speisequark 40% 250g",
+      "market": "Lidl",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "250 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Naturjoghurt 3.5% 500g",
+      "market": "REWE",
+      "price": 1.37,
+      "discount_price": 1.19,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Naturjoghurt 3.5% 500g",
+      "market": "ALDI Süd",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Naturjoghurt 3.5% 500g",
+      "market": "Lidl",
+      "price": 0.95,
+      "discount_price": 0.85,
+      "unit": "500 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllermilch 400ml",
+      "market": "REWE",
+      "price": 1.6,
+      "discount_price": 1.39,
+      "unit": "400 ml",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllermilch 400ml",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "400 ml",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllermilch 400ml",
+      "market": "Lidl",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "400 ml",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schlagsahne 200g Becher",
+      "market": "REWE",
+      "price": 1.37,
+      "discount_price": 1.19,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schlagsahne 200g Becher",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schlagsahne 200g Becher",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schmand 200g",
+      "market": "REWE",
+      "price": 1.25,
+      "discount_price": 1.09,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schmand 200g",
+      "market": "ALDI Süd",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Schmand 200g",
+      "market": "Lidl",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Crème Fraîche 200g",
+      "market": "REWE",
+      "price": 1.37,
+      "discount_price": 1.19,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Crème Fraîche 200g",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Crème Fraîche 200g",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Molkerei",
+      "city": "Köln"
+    },
+    {
+      "name": "Freilandeier 10er Pack",
+      "market": "REWE",
+      "price": 2.98,
+      "discount_price": 2.59,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Freilandeier 10er Pack",
+      "market": "ALDI Süd",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Freilandeier 10er Pack",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Eier 10er Pack",
+      "market": "REWE",
+      "price": 3.78,
+      "discount_price": 3.29,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Eier 10er Pack",
+      "market": "ALDI Süd",
+      "price": 3.12,
+      "discount_price": 2.79,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Eier 10er Pack",
+      "market": "Lidl",
+      "price": 3.12,
+      "discount_price": 2.79,
+      "unit": "10 Stk",
+      "category": "Eier",
+      "city": "Köln"
+    },
+    {
+      "name": "Spaghetti 500g",
+      "market": "REWE",
+      "price": 0.91,
+      "discount_price": 0.79,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Spaghetti 500g",
+      "market": "ALDI Süd",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Spaghetti 500g",
+      "market": "Lidl",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Penne Rigate 500g",
+      "market": "REWE",
+      "price": 0.91,
+      "discount_price": 0.79,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Penne Rigate 500g",
+      "market": "ALDI Süd",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Penne Rigate 500g",
+      "market": "Lidl",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Barilla Spaghetti N°5 500g",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 0.89,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Barilla Spaghetti N°5 500g",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Barilla Spaghetti N°5 500g",
+      "market": "Lidl",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "500 g",
+      "category": "Nudeln",
+      "city": "Köln"
+    },
+    {
+      "name": "Basmati Reis 1kg",
+      "market": "REWE",
+      "price": 3.21,
+      "discount_price": 2.79,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Basmati Reis 1kg",
+      "market": "ALDI Süd",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Basmati Reis 1kg",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Jasmin Reis 1kg",
+      "market": "REWE",
+      "price": 3.32,
+      "discount_price": 2.89,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Jasmin Reis 1kg",
+      "market": "ALDI Süd",
+      "price": 2.56,
+      "discount_price": 2.29,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Jasmin Reis 1kg",
+      "market": "Lidl",
+      "price": 2.56,
+      "discount_price": 2.29,
+      "unit": "1 kg",
+      "category": "Reis",
+      "city": "Köln"
+    },
+    {
+      "name": "Passierte Tomaten 500g Tetrapack",
+      "market": "REWE",
+      "price": 1.02,
+      "discount_price": 0.89,
+      "unit": "500 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Passierte Tomaten 500g Tetrapack",
+      "market": "ALDI Süd",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "500 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Passierte Tomaten 500g Tetrapack",
+      "market": "Lidl",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "500 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Gehackte Tomaten Dose 400g",
+      "market": "REWE",
+      "price": 1.02,
+      "discount_price": 0.89,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Gehackte Tomaten Dose 400g",
+      "market": "ALDI Süd",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Gehackte Tomaten Dose 400g",
+      "market": "Lidl",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Kichererbsen Dose 400g",
+      "market": "REWE",
+      "price": 0.98,
+      "discount_price": 0.85,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Kichererbsen Dose 400g",
+      "market": "ALDI Süd",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "400 g",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
       "name": "Kichererbsen Dose 400g",
       "market": "Lidl",
-      "price": 0.85,
-      "discount_price": 0.55,
-      "unit": "Abtropfgewicht 240g",
+      "price": 0.66,
+      "discount_price": 0.59,
+      "unit": "400 g",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
-      "name": "Bio Kokosmilch 400ml",
-      "market": "Lidl",
-      "price": 1.69,
-      "discount_price": 1.19,
-      "unit": "1 l = 2.98 €",
+      "name": "Kidneybohnen Dose 400g",
+      "market": "REWE",
+      "price": 0.98,
+      "discount_price": 0.85,
+      "unit": "400 g",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
-      "name": "Frische Champignons weiß 500g",
+      "name": "Kidneybohnen Dose 400g",
+      "market": "ALDI Süd",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Kidneybohnen Dose 400g",
       "market": "Lidl",
-      "price": 1.89,
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "400 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Kokosmilch 400ml Dose",
+      "market": "REWE",
+      "price": 1.94,
+      "discount_price": 1.69,
+      "unit": "400 ml",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Kokosmilch 400ml Dose",
+      "market": "ALDI Süd",
+      "price": 1.44,
       "discount_price": 1.29,
-      "unit": "1 kg = 2.58 €",
+      "unit": "400 ml",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
-      "name": "Fleischwurst Schinken 400g",
+      "name": "Kokosmilch 400ml Dose",
       "market": "Lidl",
-      "price": 2.29,
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "400 ml",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Mais Dose 300g",
+      "market": "REWE",
+      "price": 1.14,
+      "discount_price": 0.99,
+      "unit": "300 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Mais Dose 300g",
+      "market": "ALDI Süd",
+      "price": 0.88,
+      "discount_price": 0.79,
+      "unit": "300 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Mais Dose 300g",
+      "market": "Lidl",
+      "price": 0.88,
+      "discount_price": 0.79,
+      "unit": "300 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Thunfisch in Öl Dose 185g",
+      "market": "REWE",
+      "price": 2.17,
       "discount_price": 1.89,
-      "unit": "1 kg = 4.73 €",
+      "unit": "185 g",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
-      "name": "Milbona Emmentaler gerieben 250g",
-      "market": "Lidl",
-      "price": 2.19,
+      "name": "Thunfisch in Öl Dose 185g",
+      "market": "ALDI Süd",
+      "price": 1.67,
       "discount_price": 1.49,
-      "unit": "1 kg = 5.96 €",
+      "unit": "185 g",
+      "category": "Konserven",
       "city": "Köln"
     },
     {
-      "name": "Chef Select Lasagne Bolognese 1kg",
+      "name": "Thunfisch in Öl Dose 185g",
       "market": "Lidl",
-      "price": 4.49,
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "185 g",
+      "category": "Konserven",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Olivenöl Nativ Extra 500ml",
+      "market": "REWE",
+      "price": 8.04,
+      "discount_price": 6.99,
+      "unit": "500 ml",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Olivenöl Nativ Extra 500ml",
+      "market": "ALDI Süd",
+      "price": 6.15,
+      "discount_price": 5.49,
+      "unit": "500 ml",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Olivenöl Nativ Extra 500ml",
+      "market": "Lidl",
+      "price": 6.15,
+      "discount_price": 5.49,
+      "unit": "500 ml",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Rapsöl rein 1l Flasche",
+      "market": "REWE",
+      "price": 2.17,
+      "discount_price": 1.89,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Rapsöl rein 1l Flasche",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Rapsöl rein 1l Flasche",
+      "market": "Lidl",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Sonnenblumenöl 1l",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Sonnenblumenöl 1l",
+      "market": "ALDI Süd",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Sonnenblumenöl 1l",
+      "market": "Lidl",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "1 l",
+      "category": "Öl",
+      "city": "Köln"
+    },
+    {
+      "name": "Weizenmehl Type 405 1kg",
+      "market": "REWE",
+      "price": 0.91,
+      "discount_price": 0.79,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Weizenmehl Type 405 1kg",
+      "market": "ALDI Süd",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Weizenmehl Type 405 1kg",
+      "market": "Lidl",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Zucker 1kg",
+      "market": "REWE",
+      "price": 1.6,
+      "discount_price": 1.39,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Zucker 1kg",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Zucker 1kg",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "1 kg",
+      "category": "Backen",
+      "city": "Köln"
+    },
+    {
+      "name": "Jodsalz mit Fluorid 500g",
+      "market": "REWE",
+      "price": 0.56,
+      "discount_price": 0.49,
+      "unit": "500 g",
+      "category": "Gewürze",
+      "city": "Köln"
+    },
+    {
+      "name": "Jodsalz mit Fluorid 500g",
+      "market": "ALDI Süd",
+      "price": 0.44,
+      "discount_price": 0.39,
+      "unit": "500 g",
+      "category": "Gewürze",
+      "city": "Köln"
+    },
+    {
+      "name": "Jodsalz mit Fluorid 500g",
+      "market": "Lidl",
+      "price": 0.44,
+      "discount_price": 0.39,
+      "unit": "500 g",
+      "category": "Gewürze",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Haferflocken zart 500g",
+      "market": "REWE",
+      "price": 1.02,
+      "discount_price": 0.89,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Haferflocken zart 500g",
+      "market": "ALDI Süd",
+      "price": 0.77,
+      "discount_price": 0.69,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Bio Haferflocken zart 500g",
+      "market": "Lidl",
+      "price": 0.73,
+      "discount_price": 0.65,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Knusper Müsli 500g",
+      "market": "REWE",
+      "price": 2.86,
+      "discount_price": 2.49,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Knusper Müsli 500g",
+      "market": "ALDI Süd",
+      "price": 2.12,
+      "discount_price": 1.89,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Knusper Müsli 500g",
+      "market": "Lidl",
+      "price": 2.07,
+      "discount_price": 1.85,
+      "unit": "500 g",
+      "category": "Müsli",
+      "city": "Köln"
+    },
+    {
+      "name": "Pesto Genovese 190g Glas",
+      "market": "REWE",
+      "price": 1.94,
+      "discount_price": 1.69,
+      "unit": "190 g",
+      "category": "Saucen",
+      "city": "Köln"
+    },
+    {
+      "name": "Pesto Genovese 190g Glas",
+      "market": "ALDI Süd",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "190 g",
+      "category": "Saucen",
+      "city": "Köln"
+    },
+    {
+      "name": "Pesto Genovese 190g Glas",
+      "market": "Lidl",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "190 g",
+      "category": "Saucen",
+      "city": "Köln"
+    },
+    {
+      "name": "Vollkornbrot geschnitten 500g",
+      "market": "REWE",
+      "price": 1.6,
+      "discount_price": 1.39,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Vollkornbrot geschnitten 500g",
+      "market": "ALDI Süd",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Vollkornbrot geschnitten 500g",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Toastbrot Butter / Vollkorn 500g",
+      "market": "REWE",
+      "price": 1.6,
+      "discount_price": 1.39,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Toastbrot Butter / Vollkorn 500g",
+      "market": "ALDI Süd",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Toastbrot Butter / Vollkorn 500g",
+      "market": "Lidl",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "500 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Kaiserbrötchen frisch 4 Stück",
+      "market": "REWE",
+      "price": 0.87,
+      "discount_price": 0.76,
+      "unit": "4 Stk",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Kaiserbrötchen frisch 4 Stück",
+      "market": "ALDI Süd",
+      "price": 0.63,
+      "discount_price": 0.56,
+      "unit": "4 Stk",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Kaiserbrötchen frisch 4 Stück",
+      "market": "Lidl",
+      "price": 0.63,
+      "discount_price": 0.56,
+      "unit": "4 Stk",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Baguette frisch 250g",
+      "market": "REWE",
+      "price": 1.02,
+      "discount_price": 0.89,
+      "unit": "250 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Baguette frisch 250g",
+      "market": "ALDI Süd",
+      "price": 0.66,
+      "discount_price": 0.59,
+      "unit": "250 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Baguette frisch 250g",
+      "market": "Lidl",
+      "price": 0.66,
+      "discount_price": 0.59,
+      "unit": "250 g",
+      "category": "Brot",
+      "city": "Köln"
+    },
+    {
+      "name": "Dr. Oetker Ristorante Pizza",
+      "market": "REWE",
+      "price": 4.01,
+      "discount_price": 3.49,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Dr. Oetker Ristorante Pizza",
+      "market": "ALDI Süd",
+      "price": 3.01,
+      "discount_price": 2.69,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Dr. Oetker Ristorante Pizza",
+      "market": "Lidl",
+      "price": 2.9,
+      "discount_price": 2.59,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Wagner Steinofen Pizza",
+      "market": "REWE",
+      "price": 3.44,
+      "discount_price": 2.99,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Wagner Steinofen Pizza",
+      "market": "ALDI Süd",
+      "price": 2.68,
+      "discount_price": 2.39,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Wagner Steinofen Pizza",
+      "market": "Lidl",
+      "price": 2.56,
+      "discount_price": 2.29,
+      "unit": "Stück",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pizza Margherita 3er Pack",
+      "market": "REWE",
+      "price": 3.78,
+      "discount_price": 3.29,
+      "unit": "3 Stk",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pizza Margherita 3er Pack",
+      "market": "ALDI Süd",
+      "price": 2.9,
+      "discount_price": 2.59,
+      "unit": "3 Stk",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pizza Margherita 3er Pack",
+      "market": "Lidl",
+      "price": 2.9,
+      "discount_price": 2.59,
+      "unit": "3 Stk",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pommes Frites 1kg",
+      "market": "REWE",
+      "price": 2.17,
+      "discount_price": 1.89,
+      "unit": "1 kg",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pommes Frites 1kg",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "1 kg",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Pommes Frites 1kg",
+      "market": "Lidl",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "1 kg",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Erbsen sehr fein 450g",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Erbsen sehr fein 450g",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Erbsen sehr fein 450g",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Spinat mit Blubb 450g",
+      "market": "REWE",
+      "price": 1.94,
+      "discount_price": 1.69,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Spinat mit Blubb 450g",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Spinat mit Blubb 450g",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "450 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Beerenmischung 500g",
+      "market": "REWE",
+      "price": 4.01,
+      "discount_price": 3.49,
+      "unit": "500 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Beerenmischung 500g",
+      "market": "ALDI Süd",
+      "price": 3.01,
+      "discount_price": 2.69,
+      "unit": "500 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "TK-Beerenmischung 500g",
+      "market": "Lidl",
+      "price": 3.01,
+      "discount_price": 2.69,
+      "unit": "500 g",
+      "category": "Tiefkühl",
+      "city": "Köln"
+    },
+    {
+      "name": "Lasagne Bolognese 1kg Frischepack",
+      "market": "REWE",
+      "price": 5.16,
+      "discount_price": 4.49,
+      "unit": "1 kg",
+      "category": "Fertiggerichte",
+      "city": "Köln"
+    },
+    {
+      "name": "Lasagne Bolognese 1kg Frischepack",
+      "market": "ALDI Süd",
+      "price": 4.13,
+      "discount_price": 3.69,
+      "unit": "1 kg",
+      "category": "Fertiggerichte",
+      "city": "Köln"
+    },
+    {
+      "name": "Lasagne Bolognese 1kg Frischepack",
+      "market": "Lidl",
+      "price": 3.91,
       "discount_price": 3.49,
       "unit": "1 kg",
+      "category": "Fertiggerichte",
       "city": "Köln"
     },
     {
-      "name": "Italienischer Rohschinken 100g",
+      "name": "Ritter Sport Schokolade 100g",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Ritter Sport Schokolade 100g",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Ritter Sport Schokolade 100g",
       "market": "Lidl",
-      "price": 2.19,
+      "price": 1.22,
+      "discount_price": 0.88,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Milka Schokolade 100g Tafel",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Milka Schokolade 100g Tafel",
+      "market": "ALDI Süd",
+      "price": 1.24,
+      "discount_price": 1.11,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Milka Schokolade 100g Tafel",
+      "market": "Lidl",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "100 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Haribo Goldbären 175g Beutel",
+      "market": "REWE",
+      "price": 1.37,
+      "discount_price": 1.19,
+      "unit": "175 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Haribo Goldbären 175g Beutel",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "175 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Haribo Goldbären 175g Beutel",
+      "market": "Lidl",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "175 g",
+      "category": "Süßwaren",
+      "city": "Köln"
+    },
+    {
+      "name": "Funny Frisch Chipsfrisch 150g",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "150 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Funny Frisch Chipsfrisch 150g",
+      "market": "ALDI Süd",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "150 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Funny Frisch Chipsfrisch 150g",
+      "market": "Lidl",
+      "price": 1.56,
+      "discount_price": 1.39,
+      "unit": "150 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Kartoffelchips Paprika 200g",
+      "market": "REWE",
+      "price": 1.48,
+      "discount_price": 1.29,
+      "unit": "200 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Kartoffelchips Paprika 200g",
+      "market": "ALDI Süd",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Kartoffelchips Paprika 200g",
+      "market": "Lidl",
+      "price": 1.11,
+      "discount_price": 0.99,
+      "unit": "200 g",
+      "category": "Snacks",
+      "city": "Köln"
+    },
+    {
+      "name": "Nutella Nuss-Nugat-Creme 450g",
+      "market": "REWE",
+      "price": 3.78,
+      "discount_price": 3.29,
+      "unit": "450 g",
+      "category": "Aufstrich",
+      "city": "Köln"
+    },
+    {
+      "name": "Nutella Nuss-Nugat-Creme 450g",
+      "market": "ALDI Süd",
+      "price": 3.01,
+      "discount_price": 2.69,
+      "unit": "450 g",
+      "category": "Aufstrich",
+      "city": "Köln"
+    },
+    {
+      "name": "Nutella Nuss-Nugat-Creme 450g",
+      "market": "Lidl",
+      "price": 2.9,
+      "discount_price": 2.59,
+      "unit": "450 g",
+      "category": "Aufstrich",
+      "city": "Köln"
+    },
+    {
+      "name": "Red Bull Energy Drink 250ml",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 0.99,
+      "unit": "250 ml",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Red Bull Energy Drink 250ml",
+      "market": "ALDI Süd",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "250 ml",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Red Bull Energy Drink 250ml",
+      "market": "Lidl",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "250 ml",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Coca-Cola / Zero 1.25l Flasche",
+      "market": "REWE",
+      "price": 1.94,
       "discount_price": 1.69,
-      "unit": "100g",
+      "unit": "1.25 l",
+      "category": "Getränke",
       "city": "Köln"
     },
     {
-      "name": "Tiefkühl Himbeeren 500g Beutel",
-      "market": "Lidl",
-      "price": 3.29,
-      "discount_price": 2.39,
-      "unit": "1 kg = 4.78 €",
+      "name": "Coca-Cola / Zero 1.25l Flasche",
+      "market": "ALDI Süd",
+      "price": 1.44,
+      "discount_price": 1.29,
+      "unit": "1.25 l",
+      "category": "Getränke",
       "city": "Köln"
     },
     {
-      "name": "Saskia Mineralwasser 6x1.5l Pack",
+      "name": "Coca-Cola / Zero 1.25l Flasche",
       "market": "Lidl",
-      "price": 1.74,
-      "discount_price": 1.35,
-      "unit": "1 l = 0.15 €",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "1.25 l",
+      "category": "Getränke",
       "city": "Köln"
     },
     {
-      "name": "Frisches Baguette 250g",
-      "market": "Lidl",
-      "price": 0.79,
-      "discount_price": 0.49,
-      "unit": "100g = 0.20 €",
+      "name": "Mineralwasser Medium 6x1.5l Pack",
+      "market": "REWE",
+      "price": 2.29,
+      "discount_price": 1.99,
+      "unit": "9 l",
+      "category": "Getränke",
       "city": "Köln"
     },
     {
-      "name": "Bio Tofu Natur 400g (2x200g)",
-      "market": "Lidl",
-      "price": 2.19,
-      "discount_price": 1.69,
-      "unit": "1 kg = 4.23 €",
+      "name": "Mineralwasser Medium 6x1.5l Pack",
+      "market": "ALDI Süd",
+      "price": 1.78,
+      "discount_price": 1.59,
+      "unit": "9 l",
+      "category": "Getränke",
       "city": "Köln"
     },
     {
-      "name": "Crownfield Knusper Müsli 500g",
+      "name": "Mineralwasser Medium 6x1.5l Pack",
       "market": "Lidl",
-      "price": 2.39,
-      "discount_price": 1.79,
-      "unit": "1 kg = 3.58 €",
+      "price": 1.67,
+      "discount_price": 1.49,
+      "unit": "9 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Krombacher Pils 20x0.5l Kasten",
+      "market": "REWE",
+      "price": 17.24,
+      "discount_price": 14.99,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Krombacher Pils 20x0.5l Kasten",
+      "market": "ALDI Süd",
+      "price": 13.99,
+      "discount_price": 12.49,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Krombacher Pils 20x0.5l Kasten",
+      "market": "Lidl",
+      "price": 13.43,
+      "discount_price": 11.99,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Früh Kölsch 20x0.5l Kasten",
+      "market": "REWE",
+      "price": 19.54,
+      "discount_price": 16.99,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Früh Kölsch 20x0.5l Kasten",
+      "market": "ALDI Süd",
+      "price": 17.35,
+      "discount_price": 15.49,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Früh Kölsch 20x0.5l Kasten",
+      "market": "Lidl",
+      "price": 16.79,
+      "discount_price": 14.99,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Reissdorf Kölsch 20x0.5l Kasten",
+      "market": "REWE",
+      "price": 18.96,
+      "discount_price": 16.49,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Reissdorf Kölsch 20x0.5l Kasten",
+      "market": "ALDI Süd",
+      "price": 16.79,
+      "discount_price": 14.99,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Reissdorf Kölsch 20x0.5l Kasten",
+      "market": "Lidl",
+      "price": 16.23,
+      "discount_price": 14.49,
+      "unit": "10 l",
+      "category": "Getränke",
+      "city": "Köln"
+    },
+    {
+      "name": "Dallmayr Prodomo Kaffee 500g",
+      "market": "REWE",
+      "price": 8.61,
+      "discount_price": 7.49,
+      "unit": "500 g",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Dallmayr Prodomo Kaffee 500g",
+      "market": "ALDI Süd",
+      "price": 6.71,
+      "discount_price": 5.99,
+      "unit": "500 g",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Dallmayr Prodomo Kaffee 500g",
+      "market": "Lidl",
+      "price": 6.6,
+      "discount_price": 5.89,
+      "unit": "500 g",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Lavazza Kaffeebohnen Crema 1kg",
+      "market": "REWE",
+      "price": 18.39,
+      "discount_price": 15.99,
+      "unit": "1 kg",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Lavazza Kaffeebohnen Crema 1kg",
+      "market": "ALDI Süd",
+      "price": 14.55,
+      "discount_price": 12.99,
+      "unit": "1 kg",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Lavazza Kaffeebohnen Crema 1kg",
+      "market": "Lidl",
+      "price": 13.99,
+      "discount_price": 12.49,
+      "unit": "1 kg",
+      "category": "Kaffee",
+      "city": "Köln"
+    },
+    {
+      "name": "Toilettenpapier 3-lagig 10er Pack",
+      "market": "REWE",
+      "price": 4.54,
+      "discount_price": 3.95,
+      "unit": "10 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Toilettenpapier 3-lagig 10er Pack",
+      "market": "ALDI Süd",
+      "price": 3.86,
+      "discount_price": 3.45,
+      "unit": "10 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Toilettenpapier 3-lagig 10er Pack",
+      "market": "Lidl",
+      "price": 3.8,
+      "discount_price": 3.39,
+      "unit": "10 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Küchentücher 4er Pack",
+      "market": "REWE",
+      "price": 3.09,
+      "discount_price": 2.69,
+      "unit": "4 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Küchentücher 4er Pack",
+      "market": "ALDI Süd",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "4 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Küchentücher 4er Pack",
+      "market": "Lidl",
+      "price": 2.45,
+      "discount_price": 2.19,
+      "unit": "4 Rollen",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Geschirrspültabs 40er Pack",
+      "market": "REWE",
+      "price": 5.16,
+      "discount_price": 4.49,
+      "unit": "40 Tabs",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Geschirrspültabs 40er Pack",
+      "market": "ALDI Süd",
+      "price": 3.91,
+      "discount_price": 3.49,
+      "unit": "40 Tabs",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Geschirrspültabs 40er Pack",
+      "market": "Lidl",
+      "price": 3.91,
+      "discount_price": 3.49,
+      "unit": "40 Tabs",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Spülmittel Original 500ml",
+      "market": "REWE",
+      "price": 1.71,
+      "discount_price": 1.49,
+      "unit": "500 ml",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Spülmittel Original 500ml",
+      "market": "ALDI Süd",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "500 ml",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Spülmittel Original 500ml",
+      "market": "Lidl",
+      "price": 1.22,
+      "discount_price": 1.09,
+      "unit": "500 ml",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllbeutel mit Zugband 35l 20er",
+      "market": "REWE",
+      "price": 1.83,
+      "discount_price": 1.59,
+      "unit": "20 Stk",
+      "category": "Haushalt",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllbeutel mit Zugband 35l 20er",
+      "market": "ALDI Süd",
+      "price": 1.4,
+      "discount_price": 1.25,
+      "unit": "20 Stk",
+      "category": "Haushalt",
+      "city": "Köln"
+    },
+    {
+      "name": "Müllbeutel mit Zugband 35l 20er",
+      "market": "Lidl",
+      "price": 1.33,
+      "discount_price": 1.19,
+      "unit": "20 Stk",
+      "category": "Haushalt",
+      "city": "Köln"
+    },
+    {
+      "name": "Zahnpasta 125ml Tube",
+      "market": "REWE",
+      "price": 1.48,
+      "discount_price": 1.29,
+      "unit": "125 ml",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Zahnpasta 125ml Tube",
+      "market": "ALDI Süd",
+      "price": 1.0,
+      "discount_price": 0.89,
+      "unit": "125 ml",
+      "category": "Drogerie",
+      "city": "Köln"
+    },
+    {
+      "name": "Zahnpasta 125ml Tube",
+      "market": "Lidl",
+      "price": 0.95,
+      "discount_price": 0.85,
+      "unit": "125 ml",
+      "category": "Drogerie",
       "city": "Köln"
     }
   ]
