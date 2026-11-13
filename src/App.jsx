@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  Search, ShoppingBag, Utensils, Check, Plus, Trash2, 
-  MapPin, Sparkles, ArrowRight, Store, Flame, ChefHat, X 
+  Search, ShoppingBag, Check, Plus, Trash2, 
+  MapPin, Sparkles, Flame, ChefHat, X, ListChecks, CheckCircle2 
 } from 'lucide-react';
 
-// Vordefinierte Gerichte-Datenbank für den direkten Abgleich mit den Kölner Angeboten
+// Vordefinierte Gerichte-Datenbank
 const REZEPT_DATENBANK = [
   {
     id: 'bolognese',
@@ -56,25 +56,38 @@ const FALLBACK_ANGEBOTE = [
   { id: 9, name: 'Kokosmilch 400ml', preis: 1.11, markt: 'REWE', entfernung: 1.4, kategorie: 'Vorrat' },
   { id: 10, name: 'Paprika Mix 500g', preis: 1.49, markt: 'ALDI Süd', entfernung: 2.1, kategorie: 'Obst & Gemüse' },
   { id: 11, name: 'Gouda Jung gerieben 250g', preis: 1.89, markt: 'Lidl', entfernung: 3.2, kategorie: 'Kühlung' },
-  { id: 12, name: 'Festkochende Kartoffeln 2,5kg', preis: 2.49, markt: 'REWE', entfernung: 1.4, kategorie: 'Obst & Gemüse' }
+  { id: 12, name: 'Festkochende Kartoffeln 2,5kg', preis: 2.49, markt: 'REWE', entfernung: 1.4, kategorie: 'Obst & Gemüse' },
+  { id: 13, name: 'Red Bull Energy Drink 0,25l', preis: 0.88, markt: 'REWE', entfernung: 1.4, kategorie: 'Getränke' }
 ];
 
 export default function App() {
   const [angebote, setAngebote] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('gerichte'); // 'gerichte' | 'angebote' | 'vorrat'
+  const [activeTab, setActiveTab] = useState('einkaufsliste'); // 'einkaufsliste' | 'gerichte' | 'angebote' | 'vorrat'
   const [radius, setRadius] = useState(10);
-  
+  const [tourModus, setTourModus] = useState('split'); // 'split' | 'allinone'
+
+  // Einkaufsliste (für einzelne Produkte & übernommene Rezept-Zutaten)
+  const [einkaufsliste, setEinkaufsliste] = useState([
+    { id: 'init-1', suchbegriff: 'Red Bull', erledigt: false },
+    { id: 'init-2', suchbegriff: 'Vollmilch', erledigt: false }
+  ]);
+  const [produktSuche, setProduktSuche] = useState('');
+
   // Gericht-Suche & Auswahl
   const [gerichtSuche, setGerichtSuche] = useState('');
   const [ausgewaehltesGericht, setAusgewaehltesGericht] = useState(REZEPT_DATENBANK[0]);
-  const [tourModus, setTourModus] = useState('split'); // 'split' | 'allinone'
+  const [rezeptUebernommenMsg, setRezeptUebernommenMsg] = useState(false);
+
+  // "Alle Angebote" Filter
+  const [angebotsFilterSuche, setAngebotsFilterSuche] = useState('');
+  const [marktFilter, setMarktFilter] = useState('ALLE');
 
   // "Habe ich schon zu Hause" Vorrat
   const [vorrat, setVorrat] = useState(['Salz', 'Pfeffer', 'Öl', 'Zucker', 'Knoblauch']);
   const [neuerVorrat, setNeuerVorrat] = useState('');
 
-  // Angebote aus deiner public/angebote_koeln.json laden
+  // Live-Angebote aus public/angebote_koeln.json laden
   useEffect(() => {
     fetch('/angebote_koeln.json')
       .then((res) => {
@@ -82,7 +95,6 @@ export default function App() {
         return res.json();
       })
       .then((data) => {
-        // Normalisiert verschiedene mögliche JSON-Strukturen aus deinem Scraper
         const liste = Array.isArray(data) ? data : (data.angebote || data.items || []);
         const sauber = liste.map((item, idx) => ({
           id: item.id || idx + 1,
@@ -106,7 +118,81 @@ export default function App() {
     return angebote.filter((a) => a.entfernung <= radius);
   }, [angebote, radius]);
 
-  // Gefilterte Gerichte nach Suchbegriff (sucht nach Gerichtname ODER Zutat!)
+  // Live-Vorschläge beim Tippen in der Einkaufsliste
+  const produktVorschlaege = useMemo(() => {
+    const q = produktSuche.toLowerCase().trim();
+    if (q.length < 2) return [];
+    return angeboteImRadius
+      .filter((a) => a.name.toLowerCase().includes(q))
+      .sort((a, b) => a.preis - b.preis)
+      .slice(0, 6);
+  }, [produktSuche, angeboteImRadius]);
+
+  // Hilfsfunktion: Preisvergleich (Split vs All-in-One) für eine beliebige Item-Liste berechnen
+  const berechnePreise = (suchbegriffe) => {
+    const details = suchbegriffe.map((begriff) => {
+      const treffer = angeboteImRadius
+        .filter((a) => a.name.toLowerCase().includes(begriff.toLowerCase()))
+        .sort((a, b) => a.preis - b.preis);
+
+      return {
+        begriff,
+        bestesAngebot: treffer[0] || null,
+        alleTreffer: treffer
+      };
+    });
+
+    const splitPreis = details.reduce((sum, item) => {
+      return sum + (item.bestesAngebot ? item.bestesAngebot.preis : 1.79);
+    }, 0);
+
+    const maerkte = ['REWE', 'ALDI Süd', 'Lidl'];
+    const marktVergleich = maerkte.map((markt) => {
+      let summe = 0;
+      let angebotsTreffer = 0;
+      details.forEach((item) => {
+        const marktAngebot = item.alleTreffer.find(
+          (t) => t.markt.toLowerCase().includes(markt.toLowerCase())
+        );
+        if (marktAngebot) {
+          summe += marktAngebot.preis;
+          angebotsTreffer += 1;
+        } else {
+          summe += 1.89;
+        }
+      });
+      return { markt, summe, angebotsTreffer };
+    }).sort((a, b) => a.summe - b.summe);
+
+    return {
+      details,
+      splitPreis,
+      besterEinzelMarkt: marktVergleich[0] || { markt: 'REWE', summe: 0, angebotsTreffer: 0 }
+    };
+  };
+
+  // Analyse der aktiven Einkaufsliste
+  const einkaufsAnalyse = useMemo(() => {
+    const offeneItems = einkaufsliste.filter((i) => !i.erledigt);
+    const berechnung = berechnePreise(offeneItems.map((i) => i.suchbegriff));
+    
+    const angereicherteListe = einkaufsliste.map((item) => {
+      const treffer = angeboteImRadius
+        .filter((a) => a.name.toLowerCase().includes(item.suchbegriff.toLowerCase()))
+        .sort((a, b) => a.preis - b.preis);
+      return {
+        ...item,
+        bestesAngebot: treffer[0] || null
+      };
+    });
+
+    return {
+      ...berechnung,
+      angereicherteListe
+    };
+  }, [einkaufsliste, angeboteImRadius]);
+
+  // Analyse des ausgewählten Gerichts
   const gefundeneGerichte = useMemo(() => {
     const q = gerichtSuche.toLowerCase().trim();
     if (!q) return REZEPT_DATENBANK;
@@ -117,7 +203,6 @@ export default function App() {
     );
   }, [gerichtSuche]);
 
-  // Smart-Matching: Zutaten des gewählten Gerichts vs. Vorrat vs. Supermarkt-Angebote
   const rezeptAnalyse = useMemo(() => {
     if (!ausgewaehltesGericht) return null;
 
@@ -125,8 +210,6 @@ export default function App() {
       const imVorrat = vorrat.some(
         (v) => v.toLowerCase().includes(zutat.toLowerCase()) || zutat.toLowerCase().includes(v.toLowerCase())
       );
-
-      // Passende Angebote im Radius finden
       const treffer = angeboteImRadius
         .filter((a) => a.name.toLowerCase().includes(zutat.toLowerCase()))
         .sort((a, b) => a.preis - b.preis);
@@ -134,46 +217,66 @@ export default function App() {
       return {
         zutat,
         imVorrat,
-        bestesAngebot: treffer[0] || null,
-        alleTreffer: treffer
+        bestesAngebot: treffer[0] || null
       };
     });
 
-    const zuKaufen = zutatenDetails.filter((z) => !z.imVorrat);
-
-    // Split-Tour Preis (überall das billigste Angebot mitnehmen)
-    const splitPreis = zuKaufen.reduce((sum, item) => {
-      return sum + (item.bestesAngebot ? item.bestesAngebot.preis : 1.79); // 1.79€ Fallback-Normalpreis
-    }, 0);
-
-    // All-in-One Preis (welcher EINZELNE Markt hat die meisten Treffer / besten Gesamtpreis?)
-    const maerkte = ['REWE', 'ALDI Süd', 'Lidl'];
-    const marktVergleich = maerkte.map((markt) => {
-      let summe = 0;
-      let angebotsTreffer = 0;
-      zuKaufen.forEach((item) => {
-        const marktAngebot = item.alleTreffer.find(
-          (t) => t.markt.toLowerCase().includes(markt.toLowerCase())
-        );
-        if (marktAngebot) {
-          summe += marktAngebot.preis;
-          angebotsTreffer += 1;
-        } else {
-          summe += 1.89; // Standard-Regalpreis wenn nicht im Angebot
-        }
-      });
-      return { markt, summe, angebotsTreffer };
-    }).sort((a, b) => a.summe - b.summe);
+    const zuKaufen = zutatenDetails.filter((z) => !z.imVorrat).map((z) => z.zutat);
+    const preise = berechnePreise(zuKaufen);
 
     return {
       zutatenDetails,
-      zuKaufenCount: zuKaufen.length,
-      splitPreis,
-      besterEinzelMarkt: marktVergleich[0],
-      marktVergleich
+      zuKaufen,
+      ...preise
     };
   }, [ausgewaehltesGericht, vorrat, angeboteImRadius]);
 
+  // Gefilterte Angebote für den "Alle Angebote" Tab
+  const gefilterteAlleAngebote = useMemo(() => {
+    return angeboteImRadius.filter((a) => {
+      const matchMarkt = marktFilter === 'ALLE' || a.markt.toLowerCase().includes(marktFilter.toLowerCase());
+      const matchText = !angebotsFilterSuche.trim() || a.name.toLowerCase().includes(angebotsFilterSuche.toLowerCase());
+      return matchMarkt && matchText;
+    });
+  }, [angeboteImRadius, marktFilter, angebotsFilterSuche]);
+
+  // Actions für Einkaufsliste
+  const produktZurListeHinzufuegen = (name) => {
+    const clean = name.trim();
+    if (!clean) return;
+    setEinkaufsliste((prev) => [
+      { id: Date.now() + Math.random(), suchbegriff: clean, erledigt: false },
+      ...prev
+    ]);
+    setProduktSuche('');
+  };
+
+  const rezeptAufEinkaufslisteUebernehmen = () => {
+    if (!rezeptAnalyse || rezeptAnalyse.zuKaufen.length === 0) return;
+    const neueItems = rezeptAnalyse.zuKaufen.map((zutat, i) => ({
+      id: Date.now() + i,
+      suchbegriff: zutat,
+      erledigt: false
+    }));
+    setEinkaufsliste((prev) => [...neueItems, ...prev]);
+    setRezeptUebernommenMsg(true);
+    setTimeout(() => {
+      setRezeptUebernommenMsg(false);
+      setActiveTab('einkaufsliste');
+    }, 900);
+  };
+
+  const toggleItemErledigt = (id) => {
+    setEinkaufsliste((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, erledigt: !item.erledigt } : item))
+    );
+  };
+
+  const removeEinkaufsItem = (id) => {
+    setEinkaufsliste((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // Actions für Vorrat
   const vorratHinzufuegen = (e) => {
     e.preventDefault();
     if (!neuerVorrat.trim()) return;
@@ -232,12 +335,24 @@ export default function App() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="max-w-4xl mx-auto px-4 pb-3 flex gap-2">
+        <div className="max-w-4xl mx-auto px-4 pb-3 flex gap-2 overflow-x-auto no-scrollbar">
+          <button
+            onClick={() => setActiveTab('einkaufsliste')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
+              activeTab === 'einkaufsliste'
+                ? 'bg-gradient-to-r from-sky-500/20 to-amber-500/20 text-white border border-sky-400/40 shadow-lg shadow-sky-500/10'
+                : 'bg-white/5 text-slate-400 hover:text-white'
+            }`}
+          >
+            <ListChecks className="w-4 h-4 text-sky-400" />
+            Einkaufsliste ({einkaufsliste.filter((i) => !i.erledigt).length})
+          </button>
+
           <button
             onClick={() => setActiveTab('gerichte')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
               activeTab === 'gerichte'
-                ? 'bg-gradient-to-r from-sky-500/20 to-amber-500/20 text-white border border-sky-400/40 shadow-lg shadow-sky-500/10'
+                ? 'bg-gradient-to-r from-sky-500/20 to-amber-500/20 text-white border border-amber-400/40 shadow-lg shadow-amber-500/10'
                 : 'bg-white/5 text-slate-400 hover:text-white'
             }`}
           >
@@ -246,20 +361,8 @@ export default function App() {
           </button>
 
           <button
-            onClick={() => setActiveTab('vorrat')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-              activeTab === 'vorrat'
-                ? 'bg-sky-500/20 text-white border border-sky-400/40'
-                : 'bg-white/5 text-slate-400 hover:text-white'
-            }`}
-          >
-            <Check className="w-4 h-4 text-sky-400" />
-            Zu Hause ({vorrat.length})
-          </button>
-
-          <button
             onClick={() => setActiveTab('angebote')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
               activeTab === 'angebote'
                 ? 'bg-amber-500/20 text-white border border-amber-400/40'
                 : 'bg-white/5 text-slate-400 hover:text-white'
@@ -268,36 +371,253 @@ export default function App() {
             <Flame className="w-4 h-4 text-amber-400" />
             Alle Angebote
           </button>
+
+          <button
+            onClick={() => setActiveTab('vorrat')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
+              activeTab === 'vorrat'
+                ? 'bg-sky-500/20 text-white border border-sky-400/40'
+                : 'bg-white/5 text-slate-400 hover:text-white'
+            }`}
+          >
+            <Check className="w-4 h-4 text-emerald-400" />
+            Zu Hause ({vorrat.length})
+          </button>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 pt-6 relative z-10">
-        
-        {/* TAB 1: GERICHT-SUCHE & SMART PREISRECHNER */}
-        {activeTab === 'gerichte' && (
+
+        {/* TAB 1: EINKAUFSLISTE & EINZELPRODUKT-SUCHE */}
+        {activeTab === 'einkaufsliste' && (
           <div className="space-y-6">
-            {/* Suchleiste für Gerichte */}
-            <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-sky-400/40 to-amber-400/40 rounded-2xl blur opacity-50 group-focus-within:opacity-100 transition" />
-              <div className="relative flex items-center bg-[#0E131F] border border-white/15 rounded-2xl px-4 py-3.5">
-                <Search className="w-5 h-5 text-sky-400 mr-3" />
+            {/* Einzelprodukt-Suchleiste mit Live-Dropdown */}
+            <div className="relative z-20">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  produktZurListeHinzufuegen(produktSuche);
+                }}
+                className="relative flex items-center bg-[#0E131F] border border-white/15 focus-within:border-sky-400/60 rounded-2xl px-4 py-3 shadow-xl"
+              >
+                <Search className="w-5 h-5 text-sky-400 mr-3 shrink-0" />
                 <input
                   type="text"
-                  value={gerichtSuche}
-                  onChange={(e) => setGerichtSuche(e.target.value)}
-                  placeholder="Nach Gericht oder Zutat suchen (z.B. Bolognese, Pfannkuchen, Hähnchen)..."
+                  value={produktSuche}
+                  onChange={(e) => setProduktSuche(e.target.value)}
+                  placeholder="Einzelnes Produkt suchen oder hinzufügen (z.B. Red Bull, Hackfleisch, Eier)..."
                   className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-sm"
                 />
-                {gerichtSuche && (
-                  <button onClick={() => setGerichtSuche('')} className="text-slate-400 hover:text-white">
+                {produktSuche && (
+                  <button
+                    type="button"
+                    onClick={() => setProduktSuche('')}
+                    className="text-slate-400 hover:text-white mr-2"
+                  >
                     <X className="w-4 h-4" />
                   </button>
                 )}
-              </div>
+                <button
+                  type="submit"
+                  className="px-3.5 py-1.5 rounded-xl bg-sky-400 text-slate-950 font-semibold text-xs hover:bg-sky-300 transition shrink-0 flex items-center gap-1"
+                >
+                  <Plus className="w-4 h-4" /> Hinzufügen
+                </button>
+              </form>
+
+              {/* Live-Treffer aus den Kölner Supermärkten */}
+              {produktVorschlaege.length > 0 && (
+                <div className="mt-2 bg-[#0D111A] border border-white/15 rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="px-4 py-2 bg-white/[0.03] border-b border-white/10 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                    Passende Live-Deals in Köln (Klicken zum Übernehmen)
+                  </div>
+                  {produktVorschlaege.map((deal) => (
+                    <button
+                      key={deal.id}
+                      type="button"
+                      onClick={() => produktZurListeHinzufuegen(deal.name)}
+                      className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/[0.06] border-b border-white/5 last:border-none text-left transition"
+                    >
+                      <div>
+                        <p className="text-sm font-medium text-white">{deal.name}</p>
+                        <span className="text-xs text-slate-400">
+                          {deal.markt} • {deal.entfernung} km entfernt
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm font-bold text-sky-300">{deal.preis.toFixed(2)} €</span>
+                        <span className="p-1.5 rounded-lg bg-sky-400/15 text-sky-300">
+                          <Plus className="w-4 h-4" />
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Horizontale Rezept-Karten */}
+            {/* Tour-Auswahl & Gesamtpreis-Karte für Einkaufsliste */}
+            <div className="bg-[#0D111A]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-6 space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-white">Deine Einkaufsliste</h2>
+                  <p className="text-xs text-slate-400">
+                    Automatischer Bestpreis-Abgleich für alle offenen Produkte
+                  </p>
+                </div>
+
+                {/* Toggle: Split-Tour vs. All-in-One */}
+                <div className="flex bg-black/40 p-1 rounded-2xl border border-white/10 self-start">
+                  <button
+                    onClick={() => setTourModus('split')}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition ${
+                      tourModus === 'split'
+                        ? 'bg-sky-400 text-slate-950'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    Split-Tour ({einkaufsAnalyse.splitPreis.toFixed(2)} €)
+                  </button>
+                  <button
+                    onClick={() => setTourModus('allinone')}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition ${
+                      tourModus === 'allinone'
+                        ? 'bg-amber-400 text-slate-950'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    All-in-One ({einkaufsAnalyse.besterEinzelMarkt.summe.toFixed(2)} €)
+                  </button>
+                </div>
+              </div>
+
+              {/* Preis-Zusammenfassung */}
+              {einkaufsliste.filter((i) => !i.erledigt).length > 0 && (
+                <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-500/10 via-white/[0.03] to-amber-500/10 border border-white/10 flex flex-wrap items-center justify-between gap-4">
+                  {tourModus === 'split' ? (
+                    <div>
+                      <p className="text-xs text-sky-300 font-medium">Split-Tour (Günstigster Einzelkauf)</p>
+                      <p className="text-sm text-slate-300 mt-0.5">
+                        Jedes Produkt wird beim billigsten Markt im {radius} km Umkreis geholt.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-xs text-amber-300 font-medium">
+                        Bester Einzel-Markt: <span className="font-bold text-white">{einkaufsAnalyse.besterEinzelMarkt.markt}</span>
+                      </p>
+                      <p className="text-sm text-slate-300 mt-0.5">
+                        Nur ein Stopp nötig ({einkaufsAnalyse.besterEinzelMarkt.angebotsTreffer} Treffer im Angebot).
+                      </p>
+                    </div>
+                  )}
+                  <div className="text-right">
+                    <span className="text-xs text-slate-400 block">Offene Summe</span>
+                    <span className="text-2xl font-extrabold bg-gradient-to-r from-sky-300 to-amber-300 bg-clip-text text-transparent">
+                      {(tourModus === 'split'
+                        ? einkaufsAnalyse.splitPreis
+                        : einkaufsAnalyse.besterEinzelMarkt.summe
+                      ).toFixed(2)}{' '}
+                      €
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Liste der Produkte */}
+              {einkaufsAnalyse.angereicherteListe.length === 0 ? (
+                <div className="text-center py-10 text-slate-400 text-sm">
+                  Deine Einkaufsliste ist leer. Such oben nach einem Produkt oder übernimm ein Gericht aus dem Planer!
+                </div>
+              ) : (
+                <div className="space-y-2.5">
+                  {einkaufsAnalyse.angereicherteListe.map((item) => (
+                    <div
+                      key={item.id}
+                      className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all ${
+                        item.erledigt
+                          ? 'bg-white/[0.01] border-white/5 opacity-50'
+                          : 'bg-white/[0.03] border-white/10 hover:border-sky-400/30'
+                      }`}
+                    >
+                      <div
+                        onClick={() => toggleItemErledigt(item.id)}
+                        className="flex items-center gap-3 cursor-pointer flex-1"
+                      >
+                        <div
+                          className={`w-6 h-6 rounded-lg flex items-center justify-center border shrink-0 ${
+                            item.erledigt
+                              ? 'bg-emerald-400 border-emerald-400 text-slate-950'
+                              : 'border-white/25 text-transparent'
+                          }`}
+                        >
+                          <Check className="w-4 h-4 stroke-[3]" />
+                        </div>
+                        <div>
+                          <p className={`font-medium text-sm ${item.erledigt ? 'line-through text-slate-400' : 'text-white'}`}>
+                            {item.suchbegriff}
+                          </p>
+                          {item.bestesAngebot ? (
+                            <span className="text-xs text-sky-300">
+                              Bester Deal: {item.bestesAngebot.name} ({item.bestesAngebot.entfernung} km)
+                            </span>
+                          ) : (
+                            <span className="text-xs text-slate-500">Kein aktuelles Angebot gefunden</span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4">
+                        <div className="text-right">
+                          {item.bestesAngebot ? (
+                            <>
+                              <span className="inline-block px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 mb-0.5">
+                                {item.bestesAngebot.markt}
+                              </span>
+                              <p className="text-sm font-bold text-white">
+                                {item.bestesAngebot.preis.toFixed(2)} €
+                              </p>
+                            </>
+                          ) : (
+                            <p className="text-sm font-medium text-slate-400">~1.79 €</p>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => removeEinkaufsItem(item.id)}
+                          className="p-2 text-slate-500 hover:text-rose-400 transition"
+                          title="Löschen"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 2: GERICHT-SUCHE & REZEPT-PLANER */}
+        {activeTab === 'gerichte' && (
+          <div className="space-y-6">
+            <div className="relative flex items-center bg-[#0E131F] border border-white/15 focus-within:border-amber-400/60 rounded-2xl px-4 py-3.5">
+              <Search className="w-5 h-5 text-amber-400 mr-3" />
+              <input
+                type="text"
+                value={gerichtSuche}
+                onChange={(e) => setGerichtSuche(e.target.value)}
+                placeholder="Nach Gericht oder Zutat suchen (z.B. Bolognese, Pfannkuchen, Hähnchen)..."
+                className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-sm"
+              />
+              {gerichtSuche && (
+                <button onClick={() => setGerichtSuche('')} className="text-slate-400 hover:text-white">
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {gefundeneGerichte.map((gericht) => {
                 const aktiv = ausgewaehltesGericht?.id === gericht.id;
@@ -326,78 +646,36 @@ export default function App() {
               })}
             </div>
 
-            {/* Detail-Auswertung & Tour-Modus */}
             {ausgewaehltesGericht && rezeptAnalyse && (
               <div className="bg-[#0D111A]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-6 space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
                   <div>
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-amber-400" />
-                      <span className="text-xs font-medium text-sky-300">Smart-Einkaufsliste</span>
+                      <span className="text-xs font-medium text-sky-300">Rezept-Abgleich</span>
                     </div>
                     <h2 className="text-2xl font-bold text-white mt-0.5">{ausgewaehltesGericht.name}</h2>
                     <p className="text-xs text-slate-400 mt-1">
-                      Klicke eine Zutat an, wenn du sie schon zu Hause hast – der Preis passt sich live an.
+                      Vorhandene Zutaten abhaken und den Rest direkt auf deine Einkaufsliste schicken.
                     </p>
                   </div>
 
-                  {/* Toggle: Split-Tour vs. All-in-One */}
-                  <div className="flex bg-black/40 p-1 rounded-2xl border border-white/10 self-start">
-                    <button
-                      onClick={() => setTourModus('split')}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition ${
-                        tourModus === 'split'
-                          ? 'bg-sky-400 text-slate-950'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      Split-Tour ({rezeptAnalyse.splitPreis.toFixed(2)} €)
-                    </button>
-                    <button
-                      onClick={() => setTourModus('allinone')}
-                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition ${
-                        tourModus === 'allinone'
-                          ? 'bg-amber-400 text-slate-950'
-                          : 'text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      All-in-One ({rezeptAnalyse.besterEinzelMarkt.summe.toFixed(2)} €)
-                    </button>
-                  </div>
+                  <button
+                    onClick={rezeptAufEinkaufslisteUebernehmen}
+                    className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-sky-400 to-amber-400 text-slate-950 font-bold text-xs flex items-center gap-2 hover:opacity-90 transition shadow-lg self-start sm:self-center"
+                  >
+                    {rezeptUebernommenMsg ? (
+                      <>
+                        <CheckCircle2 className="w-4 h-4" /> Übernommen!
+                      </>
+                    ) : (
+                      <>
+                        <Plus className="w-4 h-4" /> Fehlende ({rezeptAnalyse.zuKaufen.length}) auf Einkaufsliste
+                      </>
+                    )}
+                  </button>
                 </div>
 
-                {/* Preis-Ergebnis Banner */}
-                <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-500/10 via-white/[0.03] to-amber-500/10 border border-white/10 flex flex-wrap items-center justify-between gap-4">
-                  {tourModus === 'split' ? (
-                    <div>
-                      <p className="text-xs text-sky-300 font-medium">Maximale Ersparnis (Supermarkt-Hopping)</p>
-                      <p className="text-sm text-slate-300 mt-0.5">
-                        Du nimmst für jede fehlende Zutat das billigste Angebot im {radius} km Radius mit.
-                      </p>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="text-xs text-amber-300 font-medium">
-                        Bester Einzel-Stopp: <span className="font-bold text-white">{rezeptAnalyse.besterEinzelMarkt.markt}</span>
-                      </p>
-                      <p className="text-sm text-slate-300 mt-0.5">
-                        Alles in einem Laden erledigt ({rezeptAnalyse.besterEinzelMarkt.angebotsTreffer} Zutaten dort im Angebot).
-                      </p>
-                    </div>
-                  )}
-                  <div className="text-right">
-                    <span className="text-xs text-slate-400 block">Geschätzter Einkauf</span>
-                    <span className="text-2xl font-extrabold bg-gradient-to-r from-sky-300 to-amber-300 bg-clip-text text-transparent">
-                      {(tourModus === 'split'
-                        ? rezeptAnalyse.splitPreis
-                        : rezeptAnalyse.besterEinzelMarkt.summe
-                      ).toFixed(2)}{' '}
-                      €
-                    </span>
-                  </div>
-                </div>
-
-                {/* Zutaten-Checkliste */}
                 <div className="space-y-2.5">
                   {rezeptAnalyse.zutatenDetails.map((item) => (
                     <div
@@ -430,7 +708,7 @@ export default function App() {
                               Deal: {item.bestesAngebot.name} ({item.bestesAngebot.entfernung} km)
                             </span>
                           ) : (
-                            <span className="text-xs text-slate-500">Kein Sonderangebot – Standardpreis kalkuliert</span>
+                            <span className="text-xs text-slate-500">Kein Sonderangebot – Standardpreis</span>
                           )}
                         </div>
                       </div>
@@ -459,7 +737,71 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 2: VORRAT ("HABE ICH SCHON ZU HAUSE") */}
+        {/* TAB 3: ALLE LIVE-ANGEBOTE MIT DIREKT-ADD */}
+        {activeTab === 'angebote' && (
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1 flex items-center bg-[#0E131F] border border-white/15 rounded-2xl px-4 py-2.5">
+                <Search className="w-4 h-4 text-slate-400 mr-2.5" />
+                <input
+                  type="text"
+                  value={angebotsFilterSuche}
+                  onChange={(e) => setAngebotsFilterSuche(e.target.value)}
+                  placeholder="In allen Kölner Angeboten filtern..."
+                  className="w-full bg-transparent text-white placeholder-slate-400 focus:outline-none text-sm"
+                />
+              </div>
+
+              <div className="flex gap-1.5 bg-white/5 p-1 rounded-2xl border border-white/10">
+                {['ALLE', 'REWE', 'ALDI Süd', 'Lidl'].map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => setMarktFilter(m)}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
+                      marktFilter === m ? 'bg-amber-400 text-slate-950' : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {m}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {loading ? (
+              <p className="text-sm text-slate-400">Lade Kölner Angebote...</p>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {gefilterteAlleAngebote.slice(0, 80).map((angebot) => (
+                  <div
+                    key={angebot.id}
+                    className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 flex items-center justify-between gap-3"
+                  >
+                    <div className="min-w-0">
+                      <span className="text-[11px] font-bold text-amber-400 uppercase">{angebot.markt}</span>
+                      <h4 className="text-sm font-medium text-white truncate">{angebot.name}</h4>
+                      <span className="text-xs text-slate-400">{angebot.entfernung} km entfernt</span>
+                    </div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <span className="text-base font-bold text-sky-300">{angebot.preis.toFixed(2)} €</span>
+                      <button
+                        onClick={() => {
+                          produktZurListeHinzufuegen(angebot.name);
+                          setActiveTab('einkaufsliste');
+                        }}
+                        className="p-2 rounded-xl bg-sky-400/15 text-sky-300 hover:bg-sky-400 hover:text-slate-950 transition"
+                        title="Auf die Einkaufsliste"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* TAB 4: VORRAT ("HABE ICH SCHON ZU HAUSE") */}
         {activeTab === 'vorrat' && (
           <div className="bg-[#0D111A] border border-white/10 rounded-3xl p-6 space-y-5">
             <div>
@@ -501,31 +843,6 @@ export default function App() {
                 </span>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* TAB 3: ALLE LIVE-ANGEBOTE */}
-        {activeTab === 'angebote' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {loading ? (
-              <p className="text-sm text-slate-400">Lade Kölner Angebote...</p>
-            ) : (
-              angeboteImRadius.slice(0, 60).map((angebot) => (
-                <div
-                  key={angebot.id}
-                  className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-between gap-3"
-                >
-                  <div>
-                    <span className="text-[11px] font-bold text-amber-400 uppercase">{angebot.markt}</span>
-                    <h4 className="text-sm font-medium text-white">{angebot.name}</h4>
-                    <span className="text-xs text-slate-400">{angebot.entfernung} km entfernt</span>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-base font-bold text-sky-300">{angebot.preis.toFixed(2)} €</span>
-                  </div>
-                </div>
-              ))
-            )}
           </div>
         )}
       </main>
