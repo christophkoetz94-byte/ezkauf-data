@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Search, ShoppingBag, Check, Plus, Trash2, 
-  MapPin, Sparkles, Flame, ChefHat, X, ListChecks, CheckCircle2 
+  MapPin, Sparkles, Flame, ChefHat, X, ListChecks, CheckCircle2, Store 
 } from 'lucide-react';
 
 // Vordefinierte Gerichte-Datenbank
@@ -59,6 +59,17 @@ const FALLBACK_ANGEBOTE = [
   { id: 12, name: 'Festkochende Kartoffeln 2,5kg', preis: 2.49, markt: 'REWE', entfernung: 1.4, kategorie: 'Obst & Gemüse' },
   { id: 13, name: 'Red Bull Energy Drink 0,25l', preis: 0.88, markt: 'REWE', entfernung: 1.4, kategorie: 'Getränke' }
 ];
+
+const FALLBACK_REGALPREIS = 1.79;
+
+// Kleine Hilfsfunktion für farbliche Markt-Badges
+const getMarktBadgeStyle = (markt) => {
+  const m = String(markt || '').toLowerCase();
+  if (m.includes('rewe')) return 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+  if (m.includes('aldi')) return 'bg-sky-500/20 text-sky-300 border-sky-500/40';
+  if (m.includes('lidl')) return 'bg-amber-400/20 text-amber-300 border-amber-400/40';
+  return 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+};
 
 export default function App() {
   const [angebote, setAngebote] = useState([]);
@@ -126,11 +137,22 @@ export default function App() {
                 .trim();
               const parsedPreis = parseFloat(rohPreis);
 
+              // Markt aus allen denkbaren JSON-Feldern sicher extrahieren
+              const rohMarkt =
+                item.markt ||
+                item.supermarket ||
+                item.shop ||
+                item.store ||
+                item.retailer ||
+                item.haendler ||
+                item.merchant ||
+                'REWE';
+
               return {
                 id: item.id || idx + 1,
                 name: item.name || item.title || item.produkt || item.artikel || 'Unbekanntes Angebot',
                 preis: isNaN(parsedPreis) ? 1.99 : parsedPreis,
-                markt: item.markt || item.supermarket || item.shop || item.haendler || 'REWE',
+                markt: String(rohMarkt).trim(),
                 entfernung:
                   typeof item.entfernung === 'number'
                     ? item.entfernung
@@ -160,6 +182,12 @@ export default function App() {
     return angebote.filter((a) => a.entfernung <= radius);
   }, [angebote, radius]);
 
+  // Alle verfügbaren Märkte dynamisch aus den aktuellen Angeboten ermitteln
+  const verfuegbareMaerkte = useMemo(() => {
+    const set = new Set(angeboteImRadius.map((a) => a.markt).filter(Boolean));
+    return set.size > 0 ? Array.from(set) : ['REWE', 'ALDI Süd', 'Lidl'];
+  }, [angeboteImRadius]);
+
   // Live-Vorschläge beim Tippen in der Einkaufsliste
   const produktVorschlaege = useMemo(() => {
     const q = produktSuche.toLowerCase().trim();
@@ -170,8 +198,17 @@ export default function App() {
       .slice(0, 6);
   }, [produktSuche, angeboteImRadius]);
 
-  // Hilfsfunktion: Preisvergleich (Split vs All-in-One)
+  // Preisberechnung: Split-Tour (inkl. konkreter Liste der beteiligten Märkte!) vs. All-in-One
   const berechnePreise = (suchbegriffe) => {
+    if (suchbegriffe.length === 0) {
+      return {
+        details: [],
+        splitPreis: 0,
+        splitMaerkteListe: [],
+        besterEinzelMarkt: { markt: verfuegbareMaerkte[0] || 'REWE', summe: 0, angebotsTreffer: 0 }
+      };
+    }
+
     const details = suchbegriffe.map((begriff) => {
       const treffer = angeboteImRadius
         .filter((a) => a.name.toLowerCase().includes(begriff.toLowerCase()))
@@ -184,32 +221,61 @@ export default function App() {
       };
     });
 
+    // Split-Tour: Überall das günstigste Einzelangebot mitnehmen & Märkte exakt sammeln
     const splitPreis = details.reduce((sum, item) => {
-      return sum + (item.bestesAngebot ? item.bestesAngebot.preis : 1.79);
+      return sum + (item.bestesAngebot ? item.bestesAngebot.preis : FALLBACK_REGALPREIS);
     }, 0);
 
-    const maerkte = ['REWE', 'ALDI Süd', 'Lidl'];
-    const marktVergleich = maerkte.map((markt) => {
-      let summe = 0;
-      let angebotsTreffer = 0;
-      details.forEach((item) => {
-        const marktAngebot = item.alleTreffer.find(
-          (t) => t.markt.toLowerCase().includes(markt.toLowerCase())
-        );
-        if (marktAngebot) {
-          summe += marktAngebot.preis;
-          angebotsTreffer += 1;
+    const maerkteMap = new Map();
+    details.forEach((d) => {
+      if (d.bestesAngebot && d.bestesAngebot.markt) {
+        const key = d.bestesAngebot.markt.toLowerCase();
+        if (!maerkteMap.has(key)) {
+          maerkteMap.set(key, {
+            markt: d.bestesAngebot.markt,
+            anzahl: 1,
+            summe: d.bestesAngebot.preis
+          });
         } else {
-          summe += 1.89;
+          const eintrag = maerkteMap.get(key);
+          eintrag.anzahl += 1;
+          eintrag.summe += d.bestesAngebot.preis;
         }
-      });
-      return { markt, summe, angebotsTreffer };
-    }).sort((a, b) => a.summe - b.summe);
+      }
+    });
+    const splitMaerkteListe = Array.from(maerkteMap.values());
+
+    // All-in-One: Jeden tatsächlich vorhandenen Markt durchrechnen
+    const marktVergleich = verfuegbareMaerkte
+      .map((markt) => {
+        let summe = 0;
+        let angebotsTreffer = 0;
+
+        details.forEach((item) => {
+          const marktAngebot = item.alleTreffer.find(
+            (t) => t.markt.toLowerCase() === markt.toLowerCase()
+          );
+          if (marktAngebot) {
+            summe += marktAngebot.preis;
+            angebotsTreffer += 1;
+          } else {
+            summe += FALLBACK_REGALPREIS;
+          }
+        });
+
+        return { markt, summe, angebotsTreffer };
+      })
+      .sort((a, b) => a.summe - b.summe || b.angebotsTreffer - a.angebotsTreffer);
 
     return {
       details,
       splitPreis,
-      besterEinzelMarkt: marktVergleich[0] || { markt: 'REWE', summe: 0, angebotsTreffer: 0 }
+      splitMaerkteListe,
+      besterEinzelMarkt: marktVergleich[0] || {
+        markt: verfuegbareMaerkte[0] || 'REWE',
+        summe: splitPreis,
+        angebotsTreffer: 0
+      }
     };
   };
 
@@ -232,7 +298,7 @@ export default function App() {
       ...berechnung,
       angereicherteListe
     };
-  }, [einkaufsliste, angeboteImRadius]);
+  }, [einkaufsliste, angeboteImRadius, verfuegbareMaerkte]);
 
   // Analyse des ausgewählten Gerichts
   const gefundeneGerichte = useMemo(() => {
@@ -271,7 +337,7 @@ export default function App() {
       zuKaufen,
       ...preise
     };
-  }, [ausgewaehltesGericht, vorrat, angeboteImRadius]);
+  }, [ausgewaehltesGericht, vorrat, angeboteImRadius, verfuegbareMaerkte]);
 
   // Gefilterte Angebote für den "Alle Angebote" Tab
   const gefilterteAlleAngebote = useMemo(() => {
@@ -481,13 +547,16 @@ export default function App() {
                       onClick={() => produktZurListeHinzufuegen(deal.name)}
                       className="w-full px-4 py-3 flex items-center justify-between hover:bg-white/[0.06] border-b border-white/5 last:border-none text-left transition"
                     >
-                      <div>
-                        <p className="text-sm font-medium text-white">{deal.name}</p>
-                        <span className="text-xs text-slate-400">
-                          {deal.markt} • {deal.entfernung} km entfernt
-                        </span>
+                      <div className="min-w-0 pr-3">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border ${getMarktBadgeStyle(deal.markt)}`}>
+                            {deal.markt}
+                          </span>
+                          <span className="text-xs text-slate-400">{deal.entfernung} km</span>
+                        </div>
+                        <p className="text-sm font-medium text-white truncate">{deal.name}</p>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 shrink-0">
                         <span className="text-sm font-bold text-sky-300">{deal.preis.toFixed(2)} €</span>
                         <span className="p-1.5 rounded-lg bg-sky-400/15 text-sky-300">
                           <Plus className="w-4 h-4" />
@@ -532,26 +601,52 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Routen- & Markt-Übersicht Banner */}
               {einkaufsliste.filter((i) => !i.erledigt).length > 0 && (
                 <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-500/10 via-white/[0.03] to-amber-500/10 border border-white/10 flex flex-wrap items-center justify-between gap-4">
                   {tourModus === 'split' ? (
-                    <div>
-                      <p className="text-xs text-sky-300 font-medium">Split-Tour (Günstigster Einzelkauf)</p>
-                      <p className="text-sm text-slate-300 mt-0.5">
-                        Jedes Produkt wird beim billigsten Markt im {radius} km Umkreis geholt.
+                    <div className="space-y-2">
+                      <p className="text-xs text-sky-300 font-semibold uppercase tracking-wider">
+                        {einkaufsAnalyse.splitMaerkteListe.length === 0
+                          ? 'Keine Angebots-Treffer im Radius'
+                          : einkaufsAnalyse.splitMaerkteListe.length === 1
+                          ? 'Split-Tour (Nur 1 Markt nötig)'
+                          : `Split-Tour über ${einkaufsAnalyse.splitMaerkteListe.length} Märkte`}
                       </p>
+
+                      {einkaufsAnalyse.splitMaerkteListe.length > 0 ? (
+                        <div className="flex flex-wrap items-center gap-2">
+                          {einkaufsAnalyse.splitMaerkteListe.map((m) => (
+                            <span
+                              key={m.markt}
+                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold border ${getMarktBadgeStyle(m.markt)}`}
+                            >
+                              <Store className="w-3.5 h-3.5" />
+                              {m.markt} ({m.anzahl}x • {m.summe.toFixed(2)} €)
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-sm text-slate-300">
+                          Für die aktuellen Artikel wurden keine speziellen Sonderangebote gefunden.
+                        </p>
+                      )}
                     </div>
                   ) : (
                     <div>
                       <p className="text-xs text-amber-300 font-medium">
-                        Bester Einzel-Markt: <span className="font-bold text-white">{einkaufsAnalyse.besterEinzelMarkt.markt}</span>
+                        Bester Einzel-Stopp:{' '}
+                        <span className={`inline-block ml-1 px-2.5 py-0.5 rounded-lg text-xs font-bold border ${getMarktBadgeStyle(einkaufsAnalyse.besterEinzelMarkt.markt)}`}>
+                          {einkaufsAnalyse.besterEinzelMarkt.markt}
+                        </span>
                       </p>
-                      <p className="text-sm text-slate-300 mt-0.5">
-                        Nur ein Stopp nötig ({einkaufsAnalyse.besterEinzelMarkt.angebotsTreffer} Treffer im Angebot).
+                      <p className="text-sm text-slate-300 mt-1.5">
+                        Alles in einem Laden erledigt ({einkaufsAnalyse.besterEinzelMarkt.angebotsTreffer} Treffer dort im Angebot).
                       </p>
                     </div>
                   )}
-                  <div className="text-right">
+
+                  <div className="text-right ml-auto">
                     <span className="text-xs text-slate-400 block">Offene Summe</span>
                     <span className="text-2xl font-extrabold bg-gradient-to-r from-sky-300 to-amber-300 bg-clip-text text-transparent">
                       {(tourModus === 'split'
@@ -564,6 +659,7 @@ export default function App() {
                 </div>
               )}
 
+              {/* Produkt-Liste */}
               {einkaufsAnalyse.angereicherteListe.length === 0 ? (
                 <div className="text-center py-10 text-slate-400 text-sm">
                   Deine Einkaufsliste ist leer. Such oben nach einem Produkt oder übernimm ein Gericht aus dem Planer!
@@ -581,7 +677,7 @@ export default function App() {
                     >
                       <div
                         onClick={() => toggleItemErledigt(item.id)}
-                        className="flex items-center gap-3 cursor-pointer flex-1"
+                        className="flex items-center gap-3 cursor-pointer flex-1 min-w-0 pr-2"
                       >
                         <div
                           className={`w-6 h-6 rounded-lg flex items-center justify-center border shrink-0 ${
@@ -592,13 +688,13 @@ export default function App() {
                         >
                           <Check className="w-4 h-4 stroke-[3]" />
                         </div>
-                        <div>
-                          <p className={`font-medium text-sm ${item.erledigt ? 'line-through text-slate-400' : 'text-white'}`}>
+                        <div className="min-w-0">
+                          <p className={`font-medium text-sm truncate ${item.erledigt ? 'line-through text-slate-400' : 'text-white'}`}>
                             {item.suchbegriff}
                           </p>
                           {item.bestesAngebot ? (
-                            <span className="text-xs text-sky-300">
-                              Bester Deal: {item.bestesAngebot.name} ({item.bestesAngebot.entfernung} km)
+                            <span className="text-xs text-sky-300 block truncate">
+                              Deal: {item.bestesAngebot.name} ({item.bestesAngebot.entfernung} km)
                             </span>
                           ) : (
                             <span className="text-xs text-slate-500">Kein aktuelles Angebot gefunden</span>
@@ -606,11 +702,11 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-3 shrink-0">
                         <div className="text-right">
                           {item.bestesAngebot ? (
                             <>
-                              <span className="inline-block px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 mb-0.5">
+                              <span className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-bold uppercase border mb-0.5 ${getMarktBadgeStyle(item.bestesAngebot.markt)}`}>
                                 {item.bestesAngebot.markt}
                               </span>
                               <p className="text-sm font-bold text-white">
@@ -618,7 +714,7 @@ export default function App() {
                               </p>
                             </>
                           ) : (
-                            <p className="text-sm font-medium text-slate-400">~1.79 €</p>
+                            <p className="text-sm font-medium text-slate-400">~{FALLBACK_REGALPREIS.toFixed(2)} €</p>
                           )}
                         </div>
                         <button
@@ -755,7 +851,7 @@ export default function App() {
                         <div className="text-right">
                           {item.bestesAngebot ? (
                             <>
-                              <span className="inline-block px-2 py-0.5 rounded-md text-[11px] font-bold bg-amber-400/15 text-amber-300 border border-amber-400/30 mb-0.5">
+                              <span className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-bold uppercase border mb-0.5 ${getMarktBadgeStyle(item.bestesAngebot.markt)}`}>
                                 {item.bestesAngebot.markt}
                               </span>
                               <p className="text-sm font-bold text-white">
@@ -763,7 +859,7 @@ export default function App() {
                               </p>
                             </>
                           ) : (
-                            <p className="text-sm font-medium text-slate-400">~1.79 €</p>
+                            <p className="text-sm font-medium text-slate-400">~{FALLBACK_REGALPREIS.toFixed(2)} €</p>
                           )}
                         </div>
                       )}
@@ -775,7 +871,7 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: ALLE LIVE-ANGEBOTE MIT DIREKT-ADD */}
+        {/* TAB 3: ALLE LIVE-ANGEBOTE MIT DEUTLICHEM SUPERMARKT-BADGE & DIREKT-ADD */}
         {activeTab === 'angebote' && (
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
@@ -790,12 +886,12 @@ export default function App() {
                 />
               </div>
 
-              <div className="flex gap-1.5 bg-white/5 p-1 rounded-2xl border border-white/10">
-                {['ALLE', 'REWE', 'ALDI Süd', 'Lidl'].map((m) => (
+              <div className="flex gap-1.5 bg-white/5 p-1 rounded-2xl border border-white/10 overflow-x-auto">
+                {['ALLE', ...verfuegbareMaerkte].map((m) => (
                   <button
                     key={m}
                     onClick={() => setMarktFilter(m)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition ${
                       marktFilter === m ? 'bg-amber-400 text-slate-950' : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -814,10 +910,15 @@ export default function App() {
                     key={angebot.id}
                     className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 flex items-center justify-between gap-3"
                   >
-                    <div className="min-w-0">
-                      <span className="text-[11px] font-bold text-amber-400 uppercase">{angebot.markt}</span>
+                    <div className="min-w-0 space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold uppercase border ${getMarktBadgeStyle(angebot.markt)}`}>
+                          <Store className="w-3 h-3" />
+                          {angebot.markt}
+                        </span>
+                        <span className="text-xs text-slate-400">{angebot.entfernung} km</span>
+                      </div>
                       <h4 className="text-sm font-medium text-white truncate">{angebot.name}</h4>
-                      <span className="text-xs text-slate-400">{angebot.entfernung} km entfernt</span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
                       <span className="text-base font-bold text-sky-300">{angebot.preis.toFixed(2)} €</span>
