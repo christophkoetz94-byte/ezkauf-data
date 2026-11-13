@@ -62,7 +62,54 @@ const FALLBACK_ANGEBOTE = [
 
 const FALLBACK_REGALPREIS = 1.79;
 
-// Kleine Hilfsfunktion für farbliche Markt-Badges
+// Erkennt & normalisiert den Supermarkt zuverlässig aus jedem JSON-Item
+const erkenneSupermarkt = (item, fallbackKey = '') => {
+  const kandidaten = [
+    item.markt,
+    item.supermarket,
+    item.supermarkt,
+    item.market,
+    item.shop,
+    item.store,
+    item.retailer,
+    item.chain,
+    item.haendler,
+    item.merchant,
+    item.provider,
+    item.source,
+    item.brand,
+    Array.isArray(item.discounters) ? item.discounters[0] : item.discounters,
+    fallbackKey
+  ];
+
+  // Alle Kandidaten + das gesamte JSON-Item als Text prüfen, falls der Markt verschachtelt steht
+  const suchText = [
+    ...kandidaten.filter(Boolean).map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v))),
+    JSON.stringify(item)
+  ]
+    .join(' ')
+    .toLowerCase();
+
+  if (suchText.includes('aldi')) return 'ALDI Süd';
+  if (suchText.includes('rewe')) return 'REWE';
+  if (suchText.includes('lidl')) return 'Lidl';
+  if (suchText.includes('kaufland')) return 'Kaufland';
+  if (suchText.includes('penny')) return 'Penny';
+  if (suchText.includes('netto')) return 'Netto';
+  if (suchText.includes('edeka')) return 'EDEKA';
+
+  // Falls ein echter Name da ist, der nicht bloß "offers" oder "items" heißt
+  const direkterName = kandidaten.find(
+    (k) =>
+      typeof k === 'string' &&
+      k.trim().length > 1 &&
+      !['offers', 'items', 'deals', 'angebote', 'products'].includes(k.trim().toLowerCase())
+  );
+
+  return direkterName ? direkterName.trim() : 'REWE';
+};
+
+// Farbige Markt-Badges (REWE = Rot, ALDI Süd = Babyblau, Lidl = Gelb/Orange)
 const getMarktBadgeStyle = (markt) => {
   const m = String(markt || '').toLowerCase();
   if (m.includes('rewe')) return 'bg-rose-500/20 text-rose-300 border-rose-500/40';
@@ -74,11 +121,11 @@ const getMarktBadgeStyle = (markt) => {
 export default function App() {
   const [angebote, setAngebote] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('einkaufsliste'); // 'einkaufsliste' | 'gerichte' | 'angebote' | 'vorrat'
+  const [activeTab, setActiveTab] = useState('einkaufsliste');
   const [radius, setRadius] = useState(10);
-  const [tourModus, setTourModus] = useState('split'); // 'split' | 'allinone'
+  const [tourModus, setTourModus] = useState('split');
 
-  // Einkaufsliste (für einzelne Produkte & übernommene Rezept-Zutaten)
+  // Einkaufsliste
   const [einkaufsliste, setEinkaufsliste] = useState([
     { id: 'init-1', suchbegriff: 'Red Bull', erledigt: false },
     { id: 'init-2', suchbegriff: 'Vollmilch', erledigt: false }
@@ -94,11 +141,11 @@ export default function App() {
   const [angebotsFilterSuche, setAngebotsFilterSuche] = useState('');
   const [marktFilter, setMarktFilter] = useState('ALLE');
 
-  // "Habe ich schon zu Hause" Vorrat
+  // Vorrat
   const [vorrat, setVorrat] = useState(['Salz', 'Pfeffer', 'Öl', 'Zucker', 'Knoblauch']);
   const [neuerVorrat, setNeuerVorrat] = useState('');
 
-  // Live-Angebote direkt aus deinem GitHub-Repo (ezkauf-data) oder lokalem public-Ordner laden
+  // Live-Angebote aus GitHub-Repo (ezkauf-data) oder lokalem public-Ordner laden
   useEffect(() => {
     const quellen = [
       'https://raw.githubusercontent.com/christophkoetz94-byte/ezkauf-data/main/public/angebote_koeln.json',
@@ -115,44 +162,38 @@ export default function App() {
 
           let liste = [];
           if (Array.isArray(data)) {
-            liste = data;
+            liste = data.map((entry) => ({ entry, wrapperKey: '' }));
           } else if (data && typeof data === 'object') {
-            if (Array.isArray(data.angebote)) liste = data.angebote;
-            else if (Array.isArray(data.items)) liste = data.items;
-            else if (Array.isArray(data.deals)) liste = data.deals;
-            else {
+            if (Array.isArray(data.offers)) {
+              liste = data.offers.map((entry) => ({ entry, wrapperKey: '' }));
+            } else if (Array.isArray(data.angebote)) {
+              liste = data.angebote.map((entry) => ({ entry, wrapperKey: '' }));
+            } else if (Array.isArray(data.items)) {
+              liste = data.items.map((entry) => ({ entry, wrapperKey: '' }));
+            } else if (Array.isArray(data.deals)) {
+              liste = data.deals.map((entry) => ({ entry, wrapperKey: '' }));
+            } else {
               Object.entries(data).forEach(([key, val]) => {
                 if (Array.isArray(val)) {
-                  val.forEach((entry) => liste.push({ markt: key, ...entry }));
+                  val.forEach((entry) => liste.push({ entry, wrapperKey: key }));
                 }
               });
             }
           }
 
           if (liste.length > 0) {
-            const sauber = liste.map((item, idx) => {
+            const sauber = liste.map(({ entry: item, wrapperKey }, idx) => {
               const rohPreis = String(item.preis ?? item.price ?? item.angebotspreis ?? '1.99')
                 .replace('€', '')
                 .replace(',', '.')
                 .trim();
               const parsedPreis = parseFloat(rohPreis);
 
-              // Markt aus allen denkbaren JSON-Feldern sicher extrahieren
-              const rohMarkt =
-                item.markt ||
-                item.supermarket ||
-                item.shop ||
-                item.store ||
-                item.retailer ||
-                item.haendler ||
-                item.merchant ||
-                'REWE';
-
               return {
                 id: item.id || idx + 1,
                 name: item.name || item.title || item.produkt || item.artikel || 'Unbekanntes Angebot',
                 preis: isNaN(parsedPreis) ? 1.99 : parsedPreis,
-                markt: String(rohMarkt).trim(),
+                markt: erkenneSupermarkt(item, wrapperKey),
                 entfernung:
                   typeof item.entfernung === 'number'
                     ? item.entfernung
@@ -182,7 +223,7 @@ export default function App() {
     return angebote.filter((a) => a.entfernung <= radius);
   }, [angebote, radius]);
 
-  // Alle verfügbaren Märkte dynamisch aus den aktuellen Angeboten ermitteln
+  // Alle verfügbaren Märkte dynamisch ermitteln
   const verfuegbareMaerkte = useMemo(() => {
     const set = new Set(angeboteImRadius.map((a) => a.markt).filter(Boolean));
     return set.size > 0 ? Array.from(set) : ['REWE', 'ALDI Süd', 'Lidl'];
@@ -221,7 +262,6 @@ export default function App() {
       };
     });
 
-    // Split-Tour: Überall das günstigste Einzelangebot mitnehmen & Märkte exakt sammeln
     const splitPreis = details.reduce((sum, item) => {
       return sum + (item.bestesAngebot ? item.bestesAngebot.preis : FALLBACK_REGALPREIS);
     }, 0);
@@ -245,7 +285,6 @@ export default function App() {
     });
     const splitMaerkteListe = Array.from(maerkteMap.values());
 
-    // All-in-One: Jeden tatsächlich vorhandenen Markt durchrechnen
     const marktVergleich = verfuegbareMaerkte
       .map((markt) => {
         let summe = 0;
@@ -348,7 +387,7 @@ export default function App() {
     });
   }, [angeboteImRadius, marktFilter, angebotsFilterSuche]);
 
-  // Actions für Einkaufsliste
+  // Actions
   const produktZurListeHinzufuegen = (name) => {
     const clean = name.trim();
     if (!clean) return;
@@ -384,7 +423,6 @@ export default function App() {
     setEinkaufsliste((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // Actions für Vorrat
   const vorratHinzufuegen = (e) => {
     e.preventDefault();
     if (!neuerVorrat.trim()) return;
@@ -404,7 +442,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#07090E] text-slate-100 font-sans selection:bg-sky-400/30 pb-24">
-      {/* Ambient Apple-Style Glows (Babyblau & Gelb-Orange) */}
+      {/* Ambient Glows */}
       <div className="fixed top-[-10%] left-[-10%] w-[450px] h-[450px] bg-sky-500/15 rounded-full blur-[130px] pointer-events-none" />
       <div className="fixed bottom-[-10%] right-[-10%] w-[450px] h-[450px] bg-amber-500/15 rounded-full blur-[130px] pointer-events-none" />
 
@@ -427,7 +465,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Radius Slider */}
           <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-3.5 py-2 rounded-2xl">
             <MapPin className="w-4 h-4 text-amber-400" />
             <span className="text-xs text-slate-300 font-medium">Köln Radius:</span>
@@ -619,7 +656,7 @@ export default function App() {
                           {einkaufsAnalyse.splitMaerkteListe.map((m) => (
                             <span
                               key={m.markt}
-                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-xs font-bold border ${getMarktBadgeStyle(m.markt)}`}
+                              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold border ${getMarktBadgeStyle(m.markt)}`}
                             >
                               <Store className="w-3.5 h-3.5" />
                               {m.markt} ({m.anzahl}x • {m.summe.toFixed(2)} €)
