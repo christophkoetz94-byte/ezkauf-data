@@ -82,7 +82,6 @@ const erkenneSupermarkt = (item, fallbackKey = '') => {
     fallbackKey
   ];
 
-  // Alle Kandidaten + das gesamte JSON-Item als Text prüfen, falls der Markt verschachtelt steht
   const suchText = [
     ...kandidaten.filter(Boolean).map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v))),
     JSON.stringify(item)
@@ -98,7 +97,6 @@ const erkenneSupermarkt = (item, fallbackKey = '') => {
   if (suchText.includes('netto')) return 'Netto';
   if (suchText.includes('edeka')) return 'EDEKA';
 
-  // Falls ein echter Name da ist, der nicht bloß "offers" oder "items" heißt
   const direkterName = kandidaten.find(
     (k) =>
       typeof k === 'string' &&
@@ -123,7 +121,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('einkaufsliste');
   const [radius, setRadius] = useState(10);
-  const [tourModus, setTourModus] = useState('split');
+  const [tourModus, setTourModus] = useState('split'); // 'split' | 'allinone'
 
   // Einkaufsliste
   const [einkaufsliste, setEinkaufsliste] = useState([
@@ -239,7 +237,7 @@ export default function App() {
       .slice(0, 6);
   }, [produktSuche, angeboteImRadius]);
 
-  // Preisberechnung: Split-Tour (inkl. konkreter Liste der beteiligten Märkte!) vs. All-in-One
+  // Preisberechnung: Split-Tour vs. All-in-One
   const berechnePreise = (suchbegriffe) => {
     if (suchbegriffe.length === 0) {
       return {
@@ -318,18 +316,39 @@ export default function App() {
     };
   };
 
-  // Analyse der aktiven Einkaufsliste
+  // Analyse der aktiven Einkaufsliste (inkl. dynamischem Deal für den aktiven Tour-Modus!)
   const einkaufsAnalyse = useMemo(() => {
     const offeneItems = einkaufsliste.filter((i) => !i.erledigt);
     const berechnung = berechnePreise(offeneItems.map((i) => i.suchbegriff));
+    const zielMarktAllInOne = berechnung.besterEinzelMarkt?.markt || '';
 
     const angereicherteListe = einkaufsliste.map((item) => {
-      const treffer = angeboteImRadius
+      const alleTreffer = angeboteImRadius
         .filter((a) => a.name.toLowerCase().includes(item.suchbegriff.toLowerCase()))
         .sort((a, b) => a.preis - b.preis);
+
+      const bestesSplitAngebot = alleTreffer[0] || null;
+      const bestesAllInOneAngebot =
+        alleTreffer.find((t) => t.markt.toLowerCase() === zielMarktAllInOne.toLowerCase()) || null;
+
+      // Alle weiteren Märkte, die dieses Produkt ebenfalls im Angebot haben
+      const weitereMaerkte = Array.from(
+        new Set(
+          alleTreffer
+            .map((t) => t.markt)
+            .filter((m) => m.toLowerCase() !== (bestesSplitAngebot?.markt || '').toLowerCase())
+        )
+      );
+
+      // Je nach gewähltem Tour-Modus den passenden Deal für die Zeilenanzeige wählen
+      const aktiverDeal = tourModus === 'split' ? bestesSplitAngebot : bestesAllInOneAngebot;
+
       return {
         ...item,
-        bestesAngebot: treffer[0] || null
+        aktiverDeal,
+        bestesSplitAngebot,
+        bestesAllInOneAngebot,
+        weitereMaerkte
       };
     });
 
@@ -337,7 +356,7 @@ export default function App() {
       ...berechnung,
       angereicherteListe
     };
-  }, [einkaufsliste, angeboteImRadius, verfuegbareMaerkte]);
+  }, [einkaufsliste, angeboteImRadius, verfuegbareMaerkte, tourModus]);
 
   // Analyse des ausgewählten Gerichts
   const gefundeneGerichte = useMemo(() => {
@@ -610,7 +629,9 @@ export default function App() {
                 <div>
                   <h2 className="text-xl font-bold text-white">Deine Einkaufsliste</h2>
                   <p className="text-xs text-slate-400">
-                    Automatischer Bestpreis-Abgleich für alle offenen Produkte
+                    {tourModus === 'split'
+                      ? 'Split-Modus: Zeigt für jedes Produkt den absolut billigsten Markt'
+                      : `All-in-One-Modus: Zeigt dir die Angebote direkt bei ${einkaufsAnalyse.besterEinzelMarkt.markt}`}
                   </p>
                 </div>
 
@@ -696,7 +717,7 @@ export default function App() {
                 </div>
               )}
 
-              {/* Produkt-Liste */}
+              {/* Produkt-Liste (passte sich jetzt dynamisch an Split vs All-in-One an!) */}
               {einkaufsAnalyse.angereicherteListe.length === 0 ? (
                 <div className="text-center py-10 text-slate-400 text-sm">
                   Deine Einkaufsliste ist leer. Such oben nach einem Produkt oder übernimm ein Gericht aus dem Planer!
@@ -729,29 +750,47 @@ export default function App() {
                           <p className={`font-medium text-sm truncate ${item.erledigt ? 'line-through text-slate-400' : 'text-white'}`}>
                             {item.suchbegriff}
                           </p>
-                          {item.bestesAngebot ? (
-                            <span className="text-xs text-sky-300 block truncate">
-                              Deal: {item.bestesAngebot.name} ({item.bestesAngebot.entfernung} km)
-                            </span>
+                          {item.aktiverDeal ? (
+                            <div className="space-y-0.5">
+                              <span className="text-xs text-sky-300 block truncate">
+                                Deal: {item.aktiverDeal.name} ({item.aktiverDeal.entfernung} km)
+                              </span>
+                              {tourModus === 'split' && item.weitereMaerkte.length > 0 && (
+                                <span className="text-[11px] text-slate-400 block truncate">
+                                  Auch im Angebot bei: {item.weitereMaerkte.join(', ')}
+                                </span>
+                              )}
+                            </div>
                           ) : (
-                            <span className="text-xs text-slate-500">Kein aktuelles Angebot gefunden</span>
+                            <span className="text-xs text-slate-500">
+                              {tourModus === 'allinone'
+                                ? `Bei ${einkaufsAnalyse.besterEinzelMarkt.markt} nicht im Angebot (Normalpreis)`
+                                : 'Kein aktuelles Angebot gefunden'}
+                            </span>
                           )}
                         </div>
                       </div>
 
                       <div className="flex items-center gap-3 shrink-0">
                         <div className="text-right">
-                          {item.bestesAngebot ? (
+                          {item.aktiverDeal ? (
                             <>
-                              <span className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-bold uppercase border mb-0.5 ${getMarktBadgeStyle(item.bestesAngebot.markt)}`}>
-                                {item.bestesAngebot.markt}
+                              <span className={`inline-block px-2 py-0.5 rounded-md text-[11px] font-bold uppercase border mb-0.5 ${getMarktBadgeStyle(item.aktiverDeal.markt)}`}>
+                                {item.aktiverDeal.markt}
                               </span>
                               <p className="text-sm font-bold text-white">
-                                {item.bestesAngebot.preis.toFixed(2)} €
+                                {item.aktiverDeal.preis.toFixed(2)} €
                               </p>
                             </>
                           ) : (
-                            <p className="text-sm font-medium text-slate-400">~{FALLBACK_REGALPREIS.toFixed(2)} €</p>
+                            <>
+                              {tourModus === 'allinone' && (
+                                <span className={`inline-block px-2 py-0.5 rounded-md text-[10px] font-bold uppercase border mb-0.5 opacity-60 ${getMarktBadgeStyle(einkaufsAnalyse.besterEinzelMarkt.markt)}`}>
+                                  {einkaufsAnalyse.besterEinzelMarkt.markt}
+                                </span>
+                              )}
+                              <p className="text-sm font-medium text-slate-400">~{FALLBACK_REGALPREIS.toFixed(2)} €</p>
+                            </>
                           )}
                         </div>
                         <button
