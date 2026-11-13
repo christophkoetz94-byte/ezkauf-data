@@ -43,7 +43,7 @@ const REZEPT_DATENBANK = [
   }
 ];
 
-// Fallback-Daten, falls angebote_koeln.json lokal mal nicht direkt geladen wird
+// Fallback-Daten, falls weder GitHub noch lokale JSON erreichbar sind
 const FALLBACK_ANGEBOTE = [
   { id: 1, name: 'Gemischtes Hackfleisch 500g', preis: 3.49, markt: 'ALDI Süd', entfernung: 2.1, kategorie: 'Fleisch' },
   { id: 2, name: 'Barilla Spaghetti 500g', preis: 0.99, markt: 'REWE', entfernung: 1.4, kategorie: 'Vorrat' },
@@ -87,30 +87,72 @@ export default function App() {
   const [vorrat, setVorrat] = useState(['Salz', 'Pfeffer', 'Öl', 'Zucker', 'Knoblauch']);
   const [neuerVorrat, setNeuerVorrat] = useState('');
 
-  // Live-Angebote aus public/angebote_koeln.json laden
+  // Live-Angebote direkt aus deinem GitHub-Repo (ezkauf-data) oder lokalem public-Ordner laden
   useEffect(() => {
-    fetch('/angebote_koeln.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('JSON nicht gefunden');
-        return res.json();
-      })
-      .then((data) => {
-        const liste = Array.isArray(data) ? data : (data.angebote || data.items || []);
-        const sauber = liste.map((item, idx) => ({
-          id: item.id || idx + 1,
-          name: item.name || item.title || item.produkt || 'Unbekanntes Angebot',
-          preis: parseFloat(String(item.preis || item.price || 1.99).replace(',', '.')),
-          markt: item.markt || item.supermarket || item.shop || 'REWE',
-          entfernung: item.entfernung || Number(((idx % 12) + 1.2).toFixed(1)),
-          kategorie: item.kategorie || 'Sonstiges'
-        }));
-        setAngebote(sauber.length > 0 ? sauber : FALLBACK_ANGEBOTE);
-        setLoading(false);
-      })
-      .catch(() => {
-        setAngebote(FALLBACK_ANGEBOTE);
-        setLoading(false);
-      });
+    const quellen = [
+      'https://raw.githubusercontent.com/christophkoetz94-byte/ezkauf-data/main/public/angebote_koeln.json',
+      'https://raw.githubusercontent.com/christophkoetz94-byte/ezkauf-data/main/angebote_koeln.json',
+      '/angebote_koeln.json'
+    ];
+
+    const ladeDaten = async () => {
+      for (const url of quellen) {
+        try {
+          const res = await fetch(url);
+          if (!res.ok) continue;
+          const data = await res.json();
+
+          let liste = [];
+          if (Array.isArray(data)) {
+            liste = data;
+          } else if (data && typeof data === 'object') {
+            if (Array.isArray(data.angebote)) liste = data.angebote;
+            else if (Array.isArray(data.items)) liste = data.items;
+            else if (Array.isArray(data.deals)) liste = data.deals;
+            else {
+              Object.entries(data).forEach(([key, val]) => {
+                if (Array.isArray(val)) {
+                  val.forEach((entry) => liste.push({ markt: key, ...entry }));
+                }
+              });
+            }
+          }
+
+          if (liste.length > 0) {
+            const sauber = liste.map((item, idx) => {
+              const rohPreis = String(item.preis ?? item.price ?? item.angebotspreis ?? '1.99')
+                .replace('€', '')
+                .replace(',', '.')
+                .trim();
+              const parsedPreis = parseFloat(rohPreis);
+
+              return {
+                id: item.id || idx + 1,
+                name: item.name || item.title || item.produkt || item.artikel || 'Unbekanntes Angebot',
+                preis: isNaN(parsedPreis) ? 1.99 : parsedPreis,
+                markt: item.markt || item.supermarket || item.shop || item.haendler || 'REWE',
+                entfernung:
+                  typeof item.entfernung === 'number'
+                    ? item.entfernung
+                    : Number(((idx % 10) + 1.1).toFixed(1)),
+                kategorie: item.kategorie || item.category || 'Sonstiges'
+              };
+            });
+
+            setAngebote(sauber);
+            setLoading(false);
+            return;
+          }
+        } catch {
+          // Nächste Quelle probieren
+        }
+      }
+
+      setAngebote(FALLBACK_ANGEBOTE);
+      setLoading(false);
+    };
+
+    ladeDaten();
   }, []);
 
   // Gefilterte Angebote nach Köln-Radius
@@ -128,7 +170,7 @@ export default function App() {
       .slice(0, 6);
   }, [produktSuche, angeboteImRadius]);
 
-  // Hilfsfunktion: Preisvergleich (Split vs All-in-One) für eine beliebige Item-Liste berechnen
+  // Hilfsfunktion: Preisvergleich (Split vs All-in-One)
   const berechnePreise = (suchbegriffe) => {
     const details = suchbegriffe.map((begriff) => {
       const treffer = angeboteImRadius
@@ -175,7 +217,7 @@ export default function App() {
   const einkaufsAnalyse = useMemo(() => {
     const offeneItems = einkaufsliste.filter((i) => !i.erledigt);
     const berechnung = berechnePreise(offeneItems.map((i) => i.suchbegriff));
-    
+
     const angereicherteListe = einkaufsliste.map((item) => {
       const treffer = angeboteImRadius
         .filter((a) => a.name.toLowerCase().includes(item.suchbegriff.toLowerCase()))
@@ -313,7 +355,9 @@ export default function App() {
               <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-sky-300 via-white to-amber-300 bg-clip-text text-transparent">
                 EZKauf <span className="text-xs font-medium text-sky-400/90 ml-1">Köln Edition</span>
               </h1>
-              <p className="text-xs text-slate-400">{angeboteImRadius.length} Live-Deals im Umkreis</p>
+              <p className="text-xs text-slate-400">
+                {loading ? 'Lade Live-Deals...' : `${angeboteImRadius.length} Live-Deals im Umkreis`}
+              </p>
             </div>
           </div>
 
@@ -392,7 +436,6 @@ export default function App() {
         {/* TAB 1: EINKAUFSLISTE & EINZELPRODUKT-SUCHE */}
         {activeTab === 'einkaufsliste' && (
           <div className="space-y-6">
-            {/* Einzelprodukt-Suchleiste mit Live-Dropdown */}
             <div className="relative z-20">
               <form
                 onSubmit={(e) => {
@@ -426,7 +469,6 @@ export default function App() {
                 </button>
               </form>
 
-              {/* Live-Treffer aus den Kölner Supermärkten */}
               {produktVorschlaege.length > 0 && (
                 <div className="mt-2 bg-[#0D111A] border border-white/15 rounded-2xl overflow-hidden shadow-2xl">
                   <div className="px-4 py-2 bg-white/[0.03] border-b border-white/10 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
@@ -457,7 +499,6 @@ export default function App() {
               )}
             </div>
 
-            {/* Tour-Auswahl & Gesamtpreis-Karte für Einkaufsliste */}
             <div className="bg-[#0D111A]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-6 space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
                 <div>
@@ -467,7 +508,6 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Toggle: Split-Tour vs. All-in-One */}
                 <div className="flex bg-black/40 p-1 rounded-2xl border border-white/10 self-start">
                   <button
                     onClick={() => setTourModus('split')}
@@ -492,7 +532,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Preis-Zusammenfassung */}
               {einkaufsliste.filter((i) => !i.erledigt).length > 0 && (
                 <div className="rounded-2xl p-4 bg-gradient-to-r from-sky-500/10 via-white/[0.03] to-amber-500/10 border border-white/10 flex flex-wrap items-center justify-between gap-4">
                   {tourModus === 'split' ? (
@@ -525,7 +564,6 @@ export default function App() {
                 </div>
               )}
 
-              {/* Liste der Produkte */}
               {einkaufsAnalyse.angereicherteListe.length === 0 ? (
                 <div className="text-center py-10 text-slate-400 text-sm">
                   Deine Einkaufsliste ist leer. Such oben nach einem Produkt oder übernimm ein Gericht aus dem Planer!
@@ -771,7 +809,7 @@ export default function App() {
               <p className="text-sm text-slate-400">Lade Kölner Angebote...</p>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {gefilterteAlleAngebote.slice(0, 80).map((angebot) => (
+                {gefilterteAlleAngebote.slice(0, 120).map((angebot) => (
                   <div
                     key={angebot.id}
                     className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 flex items-center justify-between gap-3"
